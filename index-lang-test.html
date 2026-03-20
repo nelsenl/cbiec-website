@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIEC Cyprus - 塞浦路斯企业落地服务平台</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f7fa; }
+        
+        /* 语言显示控制 */
+        [data-lang] { display: none; }
+        [data-lang="zh"] { display: inline; }
+        html[lang="en"] [data-lang="zh"], html[lang="el"] [data-lang="zh"] { display: none; }
+        html[lang="en"] [data-lang="en"] { display: inline; }
+        html[lang="el"] [data-lang="el"] { display: inline; }
+        
+        .top-bar { background: #0d1f33; color: white; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .top-info { display: flex; gap: 25px; }
+        .top-info span { display: flex; align-items: center; gap: 6px; }
+        
+        .main-header { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 50px; height: 50px; background: linear-gradient(135deg, #1a3a5c, #4fc3f7); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; }
+        .logo-text h1 { color: #1a3a5c; font-size: 20px; font-weight: bold; margin: 0; }
+        .logo-text p { color: #666; font-size: 11px; margin: 3px 0 0 0; }
+        
+        .nav-menu { display: flex; list-style: none; gap: 2px; }
+        .nav-menu a { display: block; padding: 10px 16px; color: #1a3a5c; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 5px; }
+        .nav-menu a:hover { background: #4fc3f7; color: white; }
+        
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-switch button { padding: 6px 12px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: 600; }
+        .lang-switch button.active { background: #1a3a5c; color: white; border-color: #1a3a5c; }
+        
+        .hero { position: relative; height: 550px; background: linear-gradient(135deg, #1a3a5c, #2c5f8d); display: flex; align-items: center; justify-content: center; }
+        .hero-content { text-align: center; color: white; max-width: 800px; padding: 0 20px; }
+        .hero h2 { font-size: 42px; margin-bottom: 20px; }
+        .hero p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        .btn { display: inline-block; padding: 14px 35px; background: white; color: #1a3a5c; text-decoration: none; border-radius: 8px; font-weight: bold; }
+        
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 60px 5%; }
+        .section-title { text-align: center; font-size: 32px; color: #1a3a5c; margin-bottom: 45px; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+        .service-card { background: white; padding: 28px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .service-icon { font-size: 50px; margin-bottom: 18px; }
+        .service-card h3 { color: #1a3a5c; margin-bottom: 14px; font-size: 19px; }
+        .service-card p { color: #666; line-height: 1.7; }
+        
+        .footer { background: #0d1f33; color: white; padding: 50px 5% 25px; }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 35px; margin-bottom: 35px; }
+        .footer-col h4 { color: #4fc3f7; margin-bottom: 18px; font-size: 17px; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 11px; }
+        .footer-col a { color: white; text-decoration: none; opacity: 0.85; }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.12); text-align: center; opacity: 0.75; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-info">
+            <span>📞 +357-96001919</span>
+            <span>✉️ lian@cbiec.com</span>
+            <span>📍 59, Poseidonos Ave, Paphos</span>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-img">🏢</div>
+                <div class="logo-text">
+                    <h1>
+                        <span data-lang="zh">CBIEC Cyprus</span>
+                        <span data-lang="en">CBIEC Cyprus</span>
+                        <span data-lang="el">CBIEC Κύπρος</span>
+                    </h1>
+                    <p>
+                        <span data-lang="zh">塞浦路斯企业落地服务平台</span>
+                        <span data-lang="en">Cyprus Business Landing Platform</span>
+                        <span data-lang="el">Πλατφόρμα Εγκατάστασης Επιχειρήσεων</span>
+                    </p>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#home"><span data-lang="zh">首页</span><span data-lang="en">Home</span><span data-lang="el">Αρχική</span></a></li>
+                <li><a href="#services"><span data-lang="zh">服务</span><span data-lang="en">Services</span><span data-lang="el">Υπηρεσίες</span></a></li>
+                <li><a href="#about"><span data-lang="zh">关于</span><span data-lang="en">About</span><span data-lang="el">Σχετικά</span></a></li>
+                <li><a href="#contact"><span data-lang="zh">联系</span><span data-lang="en">Contact</span><span data-lang="el">Επικοινωνία</span></a></li>
+            </ul>
+            
+            <div class="lang-switch">
+                <button class="active" onclick="setLang('zh')">中文</button>
+                <button onclick="setLang('en')">EN</button>
+                <button onclick="setLang('el')">EL</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>
+                <span data-lang="zh">助力中国企业落地塞浦路斯</span>
+                <span data-lang="en">Helping Chinese Companies Land in Cyprus</span>
+                <span data-lang="el">Βοηθώντας Κινεζικές Επιχειρήσεις</span>
+            </h2>
+            <p>
+                <span data-lang="zh">一站式出海服务平台 | 专业合规 | 本地化支持</span>
+                <span data-lang="en">One-stop Service Platform | Professional | Local Support</span>
+                <span data-lang="el">Ολοκληρωμένη Πλατφόρμα Υπηρεσιών</span>
+            </p>
+            <a href="#contact" class="btn">
+                <span data-lang="zh">立即咨询</span>
+                <span data-lang="en">Contact Now</span>
+                <span data-lang="el">Επικοινωνήστε</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="main-content" id="services">
+        <h2 class="section-title">
+            <span data-lang="zh">我们的服务</span>
+            <span data-lang="en">Our Services</span>
+            <span data-lang="el">Οι Υπηρεσίες Μας</span>
+        </h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>
+                    <span data-lang="zh">企业注册</span>
+                    <span data-lang="en">Company Registration</span>
+                    <span data-lang="el">Εγγραφή Εταιρείας</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">快速完成塞浦路斯公司注册，最快 7 个工作日完成。</span>
+                    <span data-lang="en">Fast Cyprus company registration in 7 working days.</span>
+                    <span data-lang="el">Γρήγορη εγγραφή εταιρείας σε 7 ημέρες.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3>
+                    <span data-lang="zh">合规咨询</span>
+                    <span data-lang="en">Compliance Consulting</span>
+                    <span data-lang="el">Συμβουλευτική Συμμόρφωσης</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">提供专业的法律、税务、人力资源合规咨询。</span>
+                    <span data-lang="en">Professional legal, tax, and HR compliance consulting.</span>
+                    <span data-lang="el">Επαγγελματική νομική και φορολογική συμβουλευτική.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌍</div>
+                <h3>
+                    <span data-lang="zh">落地服务</span>
+                    <span data-lang="en">Landing Services</span>
+                    <span data-lang="el">Υπηρεσίες Εγκατάστασης</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">办公场地、员工招聘、资源对接等全方位支持。</span>
+                    <span data-lang="en">Office space, recruitment, and resource docking.</span>
+                    <span data-lang="el">Γραφεία, προσλήψεις και υποστήριξη πόρων.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>
+                    <span data-lang="zh">关于我们</span>
+                    <span data-lang="en">About Us</span>
+                    <span data-lang="el">Σχετικά Με Εμάς</span>
+                </h4>
+                <p>
+                    <span data-lang="zh">CBIEC Cyprus Ltd 成立于 2016 年，已帮助 500+ 中国企业成功落地欧洲。</span>
+                    <span data-lang="en">CBIEC Cyprus Ltd, established in 2016, helped 500+ Chinese companies.</span>
+                    <span data-lang="el">Ιδρύθηκε το 2016, βοήθησε 500+ κινεζικές εταιρείες.</span>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>
+                    <span data-lang="zh">联系方式</span>
+                    <span data-lang="en">Contact Info</span>
+                    <span data-lang="el">Πληροφορίες Επικοινωνίας</span>
+                </h4>
+                <p>📍 59, Poseidonos Avenue A104, 8042 Paphos, Cyprus</p>
+                <p>📞 +357-96001919</p>
+                <p>✉️ lian@cbiec.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2016-2026 CBIEC Cyprus Ltd. | HE 352690</p>
+        </div>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            // 设置 HTML lang 属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 保存偏好
+            localStorage.setItem('cbiec_lang', lang);
+            
+            console.log('Language:', lang, 'HTML lang:', document.documentElement.lang);
+        }
+        
+        // 页面加载时恢复语言
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('cbiec_lang') || 'zh';
+            if (saved !== 'zh') {
+                document.documentElement.lang = saved === 'zh' ? 'zh-CN' : saved;
+                const buttons = document.querySelectorAll('.lang-switch button');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                if (saved === 'en') buttons[1].classList.add('active');
+                if (saved === 'el') buttons[2].classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
