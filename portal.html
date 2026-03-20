@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀹㈡埛闂ㄦ埛 - CBIEC Cyprus Ltd</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', 'Microsoft YaHei', sans-serif; background: #f5f7fa; }
+        
+        /* 鐧诲綍椤甸潰 */
+        .login-container {
+            max-width: 450px;
+            margin: 80px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .login-header h1 {
+            color: #1a3a5c;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #4fc3f7;
+        }
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(26, 58, 92, 0.4);
+        }
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .forgot-password a {
+            color: #4fc3f7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+        .register-link a {
+            color: #1a3a5c;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        /* 涓荤晫闈?*/
+        .dashboard { display: none; }
+        .navbar {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .navbar button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .navbar button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+        .sidebar {
+            width: 260px;
+            background: white;
+            padding: 30px 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        .menu-item {
+            padding: 15px 30px;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+            color: #666;
+        }
+        .menu-item:hover {
+            background: #f0f7ff;
+            color: #1a3a5c;
+        }
+        .menu-item.active {
+            background: #f0f7ff;
+            border-left-color: #4fc3f7;
+            color: #1a3a5c;
+            font-weight: 600;
+        }
+        .menu-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            background: #f5f7fa;
+        }
+        .page-title {
+            font-size: 28px;
+            color: #1a3a5c;
+            margin-bottom: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #4fc3f7;
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1a3a5c;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .card-header h3 {
+            color: #1a3a5c;
+            font-size: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #1a3a5c;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .status-completed { background: #e8f5e9; color: #2e7d32; }
+        .status-processing { background: #fff3e0; color: #ef6c00; }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+        .status-new { background: #e3f2fd; color: #1976d2; }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #4fc3f7;
+            color: #1a3a5c;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: #29b6f6;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        .service-item {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        .service-info h4 {
+            color: #1a3a5c;
+            margin-bottom: 8px;
+        }
+        .service-info p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .document-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .document-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .document-name {
+            color: #1a3a5c;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .document-size {
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .message-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4fc3f7;
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .message-title {
+            color: #1a3a5c;
+            font-weight: 600;
+        }
+        .message-date {
+            color: #999;
+            font-size: 13px;
+        }
+        .message-content {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- 鐧诲綍椤甸潰 -->
+    <div class="login-container" id="loginPage">
+        <div class="login-header">
+            <div style="margin-bottom: 25px;">
+                <img src="images/CBIEC-Logo.jpg" alt="CBIEC Logo" style="width: 80px; height: 80px; object-fit: contain;">
+            </div>
+            <h1>馃攼 瀹㈡埛闂ㄦ埛鐧诲綍</h1>
+            <p>CBIEC Cyprus Ltd - 濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</p>
+        </div>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>鐢ㄦ埛鍚?/ 閭</label>
+                <input type="text" id="username" placeholder="璇疯緭鍏ョ敤鎴峰悕鎴栭偖绠? required>
+            </div>
+            <div class="form-group">
+                <label>瀵嗙爜</label>
+                <input type="password" id="password" placeholder="璇疯緭鍏ュ瘑鐮? required>
+            </div>
+            <button type="submit" class="login-btn">鐧?褰?/button>
+        </form>
+        <div class="forgot-password">
+            <a href="#" onclick="alert('璇疯仈绯诲鏈嶉噸缃瘑鐮侊細lian@cbiec.com')">蹇樿瀵嗙爜锛?/a>
+        </div>
+        <div class="register-link">
+            杩樻病鏈夎处鎴凤紵<a href="#" onclick="alert('璇疯仈绯诲鏈嶅垱寤鸿处鎴凤細lian@cbiec.com')">绔嬪嵆娉ㄥ唽</a>
+        </div>
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+            <a href="index.html" style="color: #4fc3f7; text-decoration: none; font-size: 14px;">鈫?杩斿洖瀹樼綉棣栭〉</a>
+        </div>
+    </div>
+
+    <!-- 涓荤晫闈?-->
+    <div class="dashboard" id="dashboard">
+        <nav class="navbar">
+            <div class="logo">馃彚 CBIEC 瀹㈡埛闂ㄦ埛</div>
+            <div class="user-info">
+                <span id="welcomeUser">娆㈣繋锛岀敤鎴?/span>
+                <button onclick="logout()">閫€鍑虹櫥褰?/button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="sidebar">
+                <div class="menu-item active" onclick="showSection('overview')">
+                    <span class="menu-icon">馃搳</span>鎬昏
+                </div>
+                <div class="menu-item" onclick="showSection('services')">
+                    <span class="menu-icon">馃摝</span>鎴戠殑鏈嶅姟
+                </div>
+                <div class="menu-item" onclick="showSection('orders')">
+                    <span class="menu-icon">馃搵</span>璁㈠崟绠＄悊
+                </div>
+                <div class="menu-item" onclick="showSection('documents')">
+                    <span class="menu-icon">馃搧</span>鏂囨。涓績
+                </div>
+                <div class="menu-item" onclick="showSection('messages')">
+                    <span class="menu-icon">馃挰</span>娑堟伅涓績
+                </div>
+                <div class="menu-item" onclick="showSection('profile')">
+                    <span class="menu-icon">馃懁</span>涓汉涓績
+                </div>
+                <div class="menu-item" onclick="window.location.href='index.html'">
+                    <span class="menu-icon">馃彔</span>杩斿洖瀹樼綉
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- 鎬昏 -->
+                <div id="overview">
+                    <h2 class="page-title">娆㈣繋鍥炴潵锛?/h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">杩涜涓湇鍔?/div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">宸插畬鎴愭湇鍔?/div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">鏂囨。鏁伴噺</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">寰呭鐞嗘秷鎭?/div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃摝 鏈€杩戞湇鍔?/h3>
+                            <button class="btn btn-primary" onclick="showSection('services')">鏌ョ湅鍏ㄩ儴</button>
+                        </div>
+                        <ul class="service-list">
+                            <li class="service-item">
+                                <div class="service-info">
+                                    <h4>馃彚 浼佷笟娉ㄥ唽鏈嶅姟</h4>
+                                    <p>鎻愪氦鏃ユ湡锛?026-03-15 | 鏈嶅姟椤鹃棶锛氬紶缁忕悊</p>
+                                </div>
+                                <span class="status-badge status-processing">澶勭悊涓?/span>
+                            </li>
+                            <li class="service-item">
+                                <div class="service-info">
+                                    <h4>鈿栵笍 鍚堣鍜ㄨ鏈嶅姟</h4>
+                                    <p>鎻愪氦鏃ユ湡锛?026-03-10 | 鏈嶅姟椤鹃棶锛氭潕椤鹃棶</p>
+                                </div>
+                                <span class="status-badge status-completed">宸插畬鎴?/span>
+                            </li>
+                            <li class="service-item">
+                                <div class="service-info">
+                                    <h4>馃搳 璐㈠姟浠ｇ悊鏈嶅姟</h4>
+                                    <p>鎻愪氦鏃ユ湡锛?026-03-01 | 鏈嶅姟椤鹃棶锛氱帇浼氳</p>
+                                </div>
+                                <span class="status-badge status-completed">宸插畬鎴?/span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃挰 鏈€鏂伴€氱煡</h3>
+                            <button class="btn btn-primary" onclick="showSection('messages')">鏌ョ湅鍏ㄩ儴</button>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-title">馃摙 鎮ㄧ殑浼佷笟娉ㄥ唽鐢宠宸茶繘鍏ュ鎵归樁娈?/span>
+                                <span class="message-date">2026-03-20 10:30</span>
+                            </div>
+                            <div class="message-content">
+                                灏婃暚鐨勫鎴凤紝鎮ㄧ殑浼佷笟娉ㄥ唽鐢宠宸叉彁浜よ嚦濉炴郸璺柉鍏徃娉ㄥ唽澶勶紝棰勮 3-5 涓伐浣滄棩瀹屾垚瀹℃壒銆傛垜浠細鍙婃椂閫氱煡鎮ㄥ鎵硅繘搴︺€?                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-title">鉁?鍚堣鍜ㄨ鏈嶅姟宸插畬鎴?/span>
+                                <span class="message-date">2026-03-18 15:20</span>
+                            </div>
+                            <div class="message-content">
+                                鎮ㄧ殑鍚堣鍜ㄨ鏈嶅姟宸插畬鎴愶紝鎵€鏈夋枃浠跺凡涓婁紶鑷虫枃妗ｄ腑蹇冿紝璇锋煡鏀躲€傚鏈変换浣曢棶棰橈紝璇烽殢鏃惰仈绯绘偍鐨勬湇鍔￠【闂€?                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 鎴戠殑鏈嶅姟 -->
+                <div id="services" style="display: none;">
+                    <h2 class="page-title">鎴戠殑鏈嶅姟</h2>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃摝 鏈嶅姟鍒楄〃</h3>
+                            <button class="btn btn-primary" onclick="alert('璇疯仈绯诲鏈嶆坊鍔犳柊鏈嶅姟锛歭ian@cbiec.com')">+ 鏂板鏈嶅姟</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>鏈嶅姟鍚嶇О</th>
+                                    <th>鎻愪氦鏃ユ湡</th>
+                                    <th>鏈嶅姟椤鹃棶</th>
+                                    <th>鐘舵€?/th>
+                                    <th>鎿嶄綔</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>馃彚 浼佷笟娉ㄥ唽</td>
+                                    <td>2026-03-15</td>
+                                    <td>寮犵粡鐞?/td>
+                                    <td><span class="status-badge status-processing">澶勭悊涓?/span></td>
+                                    <td><button class="btn btn-primary">鏌ョ湅璇︽儏</button></td>
+                                </tr>
+                                <tr>
+                                    <td>鈿栵笍 鍚堣鍜ㄨ</td>
+                                    <td>2026-03-10</td>
+                                    <td>鏉庨【闂?/td>
+                                    <td><span class="status-badge status-completed">宸插畬鎴?/span></td>
+                                    <td><button class="btn btn-primary">鏌ョ湅璇︽儏</button></td>
+                                </tr>
+                                <tr>
+                                    <td>馃搳 璐㈠姟浠ｇ悊</td>
+                                    <td>2026-03-01</td>
+                                    <td>鐜嬩細璁?/td>
+                                    <td><span class="status-badge status-completed">宸插畬鎴?/span></td>
+                                    <td><button class="btn btn-primary">鏌ョ湅璇︽儏</button></td>
+                                </tr>
+                                <tr>
+                                    <td>馃懃 宸ヤ綔绛捐瘉</td>
+                                    <td>2026-02-20</td>
+                                    <td>璧电粡鐞?/td>
+                                    <td><span class="status-badge status-completed">宸插畬鎴?/span></td>
+                                    <td><button class="btn btn-primary">鏌ョ湅璇︽儏</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 璁㈠崟绠＄悊 -->
+                <div id="orders" style="display: none;">
+                    <h2 class="page-title">璁㈠崟绠＄悊</h2>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃搵 璁㈠崟鍒楄〃</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>璁㈠崟鍙?/th>
+                                    <th>鏈嶅姟椤圭洰</th>
+                                    <th>閲戦</th>
+                                    <th>鏀粯鐘舵€?/th>
+                                    <th>鏃ユ湡</th>
+                                    <th>鎿嶄綔</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ORD-2026-001</td>
+                                    <td>浼佷笟娉ㄥ唽鏈嶅姟</td>
+                                    <td>鈧?,500</td>
+                                    <td><span class="status-badge status-processing">宸叉敮浠?/span></td>
+                                    <td>2026-03-15</td>
+                                    <td><button class="btn btn-primary">鏌ョ湅鍙戠エ</button></td>
+                                </tr>
+                                <tr>
+                                    <td>ORD-2026-002</td>
+                                    <td>鍚堣鍜ㄨ鏈嶅姟</td>
+                                    <td>鈧?00</td>
+                                    <td><span class="status-badge status-completed">宸叉敮浠?/span></td>
+                                    <td>2026-03-10</td>
+                                    <td><button class="btn btn-primary">鏌ョ湅鍙戠エ</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 鏂囨。涓績 -->
+                <div id="documents" style="display: none;">
+                    <h2 class="page-title">鏂囨。涓績</h2>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃搧 鎴戠殑鏂囨。</h3>
+                        </div>
+                        <div class="document-grid">
+                            <div class="document-card" onclick="alert('涓嬭浇鍔熻兘婕旂ず')">
+                                <div class="document-icon">馃搫</div>
+                                <div class="document-name">鍏徃娉ㄥ唽璇佷功</div>
+                                <div class="document-size">PDF 路 2.5 MB</div>
+                            </div>
+                            <div class="document-card" onclick="alert('涓嬭浇鍔熻兘婕旂ず')">
+                                <div class="document-icon">馃搫</div>
+                                <div class="document-name">绋庡姟鐧昏璇?/div>
+                                <div class="document-size">PDF 路 1.8 MB</div>
+                            </div>
+                            <div class="document-card" onclick="alert('涓嬭浇鍔熻兘婕旂ず')">
+                                <div class="document-icon">馃搫</div>
+                                <div class="document-name">閾惰寮€鎴疯鍙瘉</div>
+                                <div class="document-size">PDF 路 1.2 MB</div>
+                            </div>
+                            <div class="document-card" onclick="alert('涓嬭浇鍔熻兘婕旂ず')">
+                                <div class="document-icon">馃搫</div>
+                                <div class="document-name">鍚堣鍜ㄨ鎶ュ憡</div>
+                                <div class="document-size">PDF 路 5.3 MB</div>
+                            </div>
+                            <div class="document-card" onclick="alert('涓嬭浇鍔熻兘婕旂ず')">
+                                <div class="document-icon">馃搫</div>
+                                <div class="document-name">璐㈠姟瀹¤鎶ュ憡</div>
+                                <div class="document-size">PDF 路 3.7 MB</div>
+                            </div>
+                            <div class="document-card" onclick="alert('涓嬭浇鍔熻兘婕旂ず')">
+                                <div class="document-icon">馃搫</div>
+                                <div class="document-name">宸ヤ綔绛捐瘉鎵瑰噯鍑?/div>
+                                <div class="document-size">PDF 路 0.9 MB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 娑堟伅涓績 -->
+                <div id="messages" style="display: none;">
+                    <h2 class="page-title">娑堟伅涓績</h2>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃挰 鎴戠殑娑堟伅</h3>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-title">馃摙 鎮ㄧ殑浼佷笟娉ㄥ唽鐢宠宸茶繘鍏ュ鎵归樁娈?/span>
+                                <span class="message-date">2026-03-20 10:30</span>
+                            </div>
+                            <div class="message-content">
+                                灏婃暚鐨勫鎴凤紝鎮ㄧ殑浼佷笟娉ㄥ唽鐢宠宸叉彁浜よ嚦濉炴郸璺柉鍏徃娉ㄥ唽澶勶紝棰勮 3-5 涓伐浣滄棩瀹屾垚瀹℃壒銆傛垜浠細鍙婃椂閫氱煡鎮ㄥ鎵硅繘搴︺€傚鏈変换浣曢棶棰橈紝璇烽殢鏃惰仈绯绘偍鐨勬湇鍔￠【闂紶缁忕悊銆?                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-title">鉁?鍚堣鍜ㄨ鏈嶅姟宸插畬鎴?/span>
+                                <span class="message-date">2026-03-18 15:20</span>
+                            </div>
+                            <div class="message-content">
+                                鎮ㄧ殑鍚堣鍜ㄨ鏈嶅姟宸插畬鎴愶紝鎵€鏈夋枃浠跺凡涓婁紶鑷虫枃妗ｄ腑蹇冿紝璇锋煡鏀躲€傛湇鍔″唴瀹瑰寘鎷細1. 鍏徃鏋舵瀯鍚堣瀹℃煡 2. 绋庡姟鍚堣寤鸿 3. 浜哄姏璧勬簮鍚堣鎸囧銆傚鏈変换浣曢棶棰橈紝璇烽殢鏃惰仈绯绘潕椤鹃棶銆?                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-title">馃挸 鍙戠エ宸茬敓鎴?/span>
+                                <span class="message-date">2026-03-15 09:00</span>
+                            </div>
+                            <div class="message-content">
+                                鎮ㄧ殑浼佷笟娉ㄥ唽鏈嶅姟鍙戠エ宸茬敓鎴愶紝閲戦涓衡偓1,500銆傚彂绁ㄥ凡涓婁紶鑷虫枃妗ｄ腑蹇冿紝璇锋煡鏀躲€備粯娆炬柟寮忥細閾惰杞处锛岃处鎴蜂俊鎭鍙傝€冨彂绁ㄨ鎯呫€?                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 涓汉涓績 -->
+                <div id="profile" style="display: none;">
+                    <h2 class="page-title">涓汉涓績</h2>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3>馃懁 鍏徃淇℃伅</h3>
+                            <button class="btn btn-primary" onclick="alert('缂栬緫鍔熻兘婕旂ず')">缂栬緫淇℃伅</button>
+                        </div>
+                        <div style="max-width: 600px;">
+                            <div class="form-group">
+                                <label>鍏徃鍚嶇О</label>
+                                <input type="text" value="绀轰緥绉戞妧鏈夐檺鍏徃" readonly style="background: #f8f9fa;">
+                            </div>
+                            <div class="form-group">
+                                <label>鑱旂郴浜?/label>
+                                <input type="text" value="寮犵粡鐞? readonly style="background: #f8f9fa;">
+                            </div>
+                            <div class="form-group">
+                                <label>鑱旂郴鐢佃瘽</label>
+                                <input type="text" value="+86 138 **** ****" readonly style="background: #f8f9fa;">
+                            </div>
+                            <div class="form-group">
+                                <label>閭</label>
+                                <input type="email" value="example@company.com" readonly style="background: #f8f9fa;">
+                            </div>
+                            <div class="form-group">
+                                <label>鏈嶅姟椤鹃棶</label>
+                                <input type="text" value="寮犵粡鐞?(鐢佃瘽锛?357-96001919)" readonly style="background: #f8f9fa;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('welcomeUser').textContent = '娆㈣繋锛? + username;
+        }
+
+        function logout() {
+            if (confirm('纭畾瑕侀€€鍑虹櫥褰曞悧锛?)) {
+                document.getElementById('loginPage').style.display = 'block';
+                document.getElementById('dashboard').style.display = 'none';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            }
+        }
+
+        function showSection(section) {
+            const sections = ['overview', 'services', 'orders', 'documents', 'messages', 'profile'];
+            sections.forEach(s => {
+                document.getElementById(s).style.display = s === section ? 'block' : 'none';
+            });
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
