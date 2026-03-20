@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻中心 - CBIEC Cyprus</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', 'Microsoft YaHei', sans-serif; background: #f5f7fa; }
+        
+        .header {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .header h1 { font-size: 42px; margin-bottom: 15px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        
+        .nav-back {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 5%;
+        }
+        .nav-back a {
+            color: #1a3a5c;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .news-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 5%;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .news-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+        .news-content { padding: 30px; }
+        .news-date {
+            color: #4fc3f7;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .news-title {
+            color: #1a3a5c;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .news-excerpt {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .news-link {
+            color: #4fc3f7;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-link:hover { color: #1a3a5c; }
+        
+        .category-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid #1a3a5c;
+            color: #1a3a5c;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #1a3a5c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="margin-bottom: 20px;">
+            <img src="images/CBIEC-Logo.jpg" alt="CBIEC Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 10px; padding: 5px;">
+        </div>
+        <h1>📰 新闻中心</h1>
+        <p>CBIEC Cyprus 最新资讯与动态</p>
+    </div>
+    
+    <div class="nav-back">
+        <a href="index-pro.html">← 返回官网首页</a>
+    </div>
+    
+    <div class="news-container">
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterNews('all')">全部</button>
+            <button class="filter-btn" onclick="filterNews('cyprus')">塞浦资讯</button>
+            <button class="filter-btn" onclick="filterNews('cases')">成功案例</button>
+            <button class="filter-btn" onclick="filterNews('guide')">投资指南</button>
+            <button class="filter-btn" onclick="filterNews('life')">生活百科</button>
+        </div>
+        
+        <div class="news-grid">
+            <!-- 塞浦资讯 -->
+            <div class="news-card" data-category="cyprus">
+                <div class="news-image">🇨🇾</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-20 | 塞浦资讯</div>
+                    <h3 class="news-title">塞浦路斯推出新的高科技企业税收优惠政策</h3>
+                    <p class="news-excerpt">塞浦路斯政府宣布新的税收激励计划，为高科技企业提供更多税收减免和研发补贴。新政策包括企业所得税减免、研发费用加计扣除、知识产权收入免税等优惠措施。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card" data-category="cyprus">
+                <div class="news-image">🇪🇺</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-15 | 塞浦资讯</div>
+                    <h3 class="news-title">欧盟批准塞浦路斯数字游民签证计划</h3>
+                    <p class="news-excerpt">欧盟正式批准塞浦路斯数字游民签证，允许远程工作者在塞浦路斯居住和工作长达 2 年。持有该签证可在申根区自由通行，享受塞浦路斯优质生活环境。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card" data-category="cyprus">
+                <div class="news-image">✈️</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-10 | 塞浦资讯</div>
+                    <h3 class="news-title">塞浦路斯 - 中国直航航线即将开通</h3>
+                    <p class="news-excerpt">塞浦路斯航空宣布将开通直飞中国主要城市的航线，进一步促进两国经贸往来。首条航线将连接拉纳卡国际机场与北京首都国际机场。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <!-- 成功案例 -->
+            <div class="news-card" data-category="cases">
+                <div class="news-image">🏆</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-18 | 成功案例</div>
+                    <h3 class="news-title">某人工智能企业成功落地塞浦路斯</h3>
+                    <p class="news-excerpt">北京某 AI 企业通过 CBIEC 的专业服务，在 7 个工作日内完成塞浦路斯公司注册，成功开设企业银行账户，获得 3 个工作签证配额，6 个月内签约 3 个欧洲客户。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card" data-category="cases">
+                <div class="news-image">💊</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-12 | 成功案例</div>
+                    <h3 class="news-title">生物医药企业获得欧盟 EMA 认证</h3>
+                    <p class="news-excerpt">上海某生物医药企业通过 CBIEC 协助，成功获得欧盟 EMA 认证，申请到 50 万欧元研发补贴，建立欧盟研发中心，产品成功进入欧盟市场。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <!-- 投资指南 -->
+            <div class="news-card" data-category="guide">
+                <div class="news-image">📊</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-16 | 投资指南</div>
+                    <h3 class="news-title">塞浦路斯公司注册全流程详解</h3>
+                    <p class="news-excerpt">详细介绍在塞浦路斯注册公司的完整流程，包括公司名称核准、文件准备、提交申请、获得证书等步骤。正常情况下 7-10 个工作日即可完成全部注册流程。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card" data-category="guide">
+                <div class="news-image">💰</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-14 | 投资指南</div>
+                    <h3 class="news-title">塞浦路斯税收优惠政策全解析</h3>
+                    <p class="news-excerpt">全面解读塞浦路斯税收优惠政策，包括欧盟最低企业所得税率 12.5%、股息红利免税、知识产权收入免税、与 65 国避免双重征税协定等。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <!-- 生活百科 -->
+            <div class="news-card" data-category="life">
+                <div class="news-image">🏖️</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-13 | 生活百科</div>
+                    <h3 class="news-title">在塞浦路斯生活的 10 大优势</h3>
+                    <p class="news-excerpt">介绍在塞浦路斯生活的各种优势，包括地中海气候、优质教育、医疗资源、安全环境、低犯罪率、英语普及、欧盟身份、税收优惠等。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+            
+            <div class="news-card" data-category="life">
+                <div class="news-image">🎓</div>
+                <div class="news-content">
+                    <div class="news-date">📅 2026-03-11 | 生活百科</div>
+                    <h3 class="news-title">塞浦路斯教育资源全介绍</h3>
+                    <p class="news-excerpt">详细介绍塞浦路斯的教育体系，包括公立学校、私立学校、国际学校的选择，以及塞浦路斯大学、科技大学等高等教育机构。</p>
+                    <a href="#" class="news-link">阅读更多 →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function filterNews(category) {
+            const cards = document.querySelectorAll('.news-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
