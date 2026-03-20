@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIEC Cyprus</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f7fa; }
+        .header { background: #0033A0; color: white; padding: 20px; text-align: center; }
+        .nav { background: white; padding: 15px; display: flex; justify-content: center; gap: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav a { color: #0033A0; text-decoration: none; font-weight: bold; }
+        .hero { background: linear-gradient(135deg, #0033A0, #0055D4); color: white; padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 32px; margin-bottom: 20px; }
+        .btn { background: #FFC000; color: #0033A0; padding: 15px 40px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; }
+        .services { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .services h2 { text-align: center; color: #0033A0; margin-bottom: 40px; font-size: 28px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); text-align: center; border-top: 4px solid #0033A0; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,51,160,0.15); }
+        .icon { font-size: 50px; margin-bottom: 15px; }
+        .card h3 { color: #0033A0; margin-bottom: 15px; font-size: 20px; }
+        .card p { color: #666; line-height: 1.6; }
+        .footer { background: #0d1f33; color: white; padding: 40px 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏢 CBIEC Cyprus Ltd</h1>
+        <p>塞浦路斯企业落地服务平台</p>
+    </div>
+    
+    <nav class="nav">
+        <a href="#home">首页</a>
+        <a href="#news">新闻</a>
+        <a href="#services">服务</a>
+        <a href="#about">关于</a>
+        <a href="#contact">联系</a>
+    </nav>
+    
+    <section class="hero" id="home">
+        <h1>助力中国企业落地塞浦路斯</h1>
+        <p style="font-size: 18px; margin-bottom: 30px; opacity: 0.95;">一站式出海服务平台 | 专业合规 | 本地化支持 | 8 年 + 经验</p>
+        <a href="#contact" class="btn">立即咨询</a>
+    </section>
+    
+    <section class="services" id="services">
+        <h2>我们的服务</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🏢</div>
+                <h3>企业注册</h3>
+                <p>快速完成塞浦路斯公司注册，最快 7 个工作日完成</p>
+            </div>
+            <div class="card">
+                <div class="icon">⚖️</div>
+                <h3>合规咨询</h3>
+                <p>法律、税务、人力资源合规咨询</p>
+            </div>
+            <div class="card">
+                <div class="icon">🌍</div>
+                <h3>落地服务</h3>
+                <p>办公场地、招聘、资源对接</p>
+            </div>
+            <div class="card">
+                <div class="icon">💼</div>
+                <h3>商务拓展</h3>
+                <p>欧洲市场资源对接</p>
+            </div>
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>财务服务</h3>
+                <p>代理记账、税务申报、审计</p>
+            </div>
+            <div class="card">
+                <div class="icon">👥</div>
+                <h3>人力资源</h3>
+                <p>工作签证、招聘、薪酬管理</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="footer" id="contact">
+        <h3>📞 +357-96001919</h3>
+        <p>✉️ lian@cbiec.com</p>
+        <p>📍 59, Poseidonos Avenue, 8042 Paphos Cyprus, A104 Soho By Korantina Homes</p>
+        <p style="margin-top: 20px; opacity: 0.7; font-size: 14px;">© 2016-2026 CBIEC Cyprus Ltd. | HE 352690</p>
+    </div>
+</body>
+</html>
