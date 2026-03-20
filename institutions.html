@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塞浦路斯高科技投资与税务优惠机构名录 - CBIEC</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', 'Microsoft YaHei', sans-serif; background: #f5f7fa; }
+        
+        .header {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .header h1 { font-size: 42px; margin-bottom: 15px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        
+        .institutions {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 15px 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: #4fc3f7;
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid #1a3a5c;
+            color: #1a3a5c;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #1a3a5c;
+            color: white;
+        }
+        
+        .institutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .institution-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #4fc3f7;
+        }
+        .institution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        .institution-name {
+            color: #1a3a5c;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .institution-type {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .institution-desc {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .institution-services {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .institution-services li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+            font-size: 14px;
+        }
+        .institution-services li:before {
+            content: "•";
+            color: #4fc3f7;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .institution-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .institution-link:hover {
+            background: linear-gradient(135deg, #2c5f8d 0%, #4fc3f7 100%);
+            transform: translateX(5px);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 12px 30px;
+            background: #1a3a5c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover { background: #2c5f8d; }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1a3a5c;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="margin-bottom: 20px;">
+            <img src="images/CBIEC-Logo.jpg" alt="CBIEC Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 10px; padding: 5px;">
+        </div>
+        <h1>🏛️ 塞浦路斯高科技投资与税务优惠机构名录</h1>
+        <p>全面收录塞浦路斯政府机构、行业协会、服务中心等合作机构</p>
+    </div>
+
+    <div class="institutions">
+        <a href="index.html" class="back-btn">← 返回官网首页</a>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">合作机构</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">机构类别</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">官方认证</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">在线服务</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 搜索机构名称或服务..." onkeyup="filterInstitutions()">
+        </div>
+
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterCategory('all')">全部</button>
+            <button class="filter-btn" onclick="filterCategory('government')">🏛️ 政府机构</button>
+            <button class="filter-btn" onclick="filterCategory('tax')">💰 税务部门</button>
+            <button class="filter-btn" onclick="filterCategory('business')">💼 商业服务</button>
+            <button class="filter-btn" onclick="filterCategory('legal')">⚖️ 法律服务</button>
+            <button class="filter-btn" onclick="filterCategory('finance')">📊 金融服务</button>
+            <button class="filter-btn" onclick="filterCategory('education')">🎓 教育机构</button>
+            <button class="filter-btn" onclick="filterCategory('innovation')">🚀 创新支持</button>
+        </div>
+
+        <div class="institutions-grid" id="institutionsGrid">
+            <!-- 政府机构 -->
+            <div class="institution-card" data-category="government">
+                <h3 class="institution-name">🏛️ 塞浦路斯投资促进局</h3>
+                <span class="institution-type">政府机构</span>
+                <p class="institution-desc">塞浦路斯官方投资促进机构，为外国投资者提供一站式服务和投资咨询。</p>
+                <ul class="institution-services">
+                    <li>投资咨询与指导</li>
+                    <li>一站式注册服务</li>
+                    <li>商业对接服务</li>
+                    <li>市场调研支持</li>
+                </ul>
+                <a href="https://www.investincyprus.gov.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="government">
+                <h3 class="institution-name">🏛️ 塞浦路斯共和国商务部</h3>
+                <span class="institution-type">政府机构</span>
+                <p class="institution-desc">负责商业政策制定、贸易促进和企业监管的政府部门。</p>
+                <ul class="institution-services">
+                    <li>商业政策制定</li>
+                    <li>贸易促进</li>
+                    <li>企业注册监管</li>
+                    <li>国际贸易协谈</li>
+                </ul>
+                <a href="https://www.mcit.gov.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="government">
+                <h3 class="institution-name">🏛️ 塞浦路斯内政部</h3>
+                <span class="institution-type">政府机构</span>
+                <p class="institution-desc">负责移民、居留许可和公民身份事务的政府部门。</p>
+                <ul class="institution-services">
+                    <li>居留许可办理</li>
+                    <li>工作签证审批</li>
+                    <li>公民身份申请</li>
+                    <li>移民政策咨询</li>
+                </ul>
+                <a href="https://www.moi.gov.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <!-- 税务部门 -->
+            <div class="institution-card" data-category="tax">
+                <h3 class="institution-name">💰 塞浦路斯税务局</h3>
+                <span class="institution-type">税务部门</span>
+                <p class="institution-desc">负责税收征管、税务登记和税务咨询的官方机构。</p>
+                <ul class="institution-services">
+                    <li>企业税务登记</li>
+                    <li>税务申报指导</li>
+                    <li>税收优惠政策</li>
+                    <li>税务合规咨询</li>
+                </ul>
+                <a href="https://www.mof.gov.cy/tax" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="tax">
+                <h3 class="institution-name">💰 塞浦路斯海关总署</h3>
+                <span class="institution-type">税务部门</span>
+                <p class="institution-desc">负责进出口关税、增值税和海关监管的官方机构。</p>
+                <ul class="institution-services">
+                    <li>进出口报关</li>
+                    <li>关税政策咨询</li>
+                    <li>增值税退税</li>
+                    <li>贸易合规指导</li>
+                </ul>
+                <a href="https://www.mof.gov.cy/customs" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <!-- 商业服务 -->
+            <div class="institution-card" data-category="business">
+                <h3 class="institution-name">💼 塞浦路斯商会</h3>
+                <span class="institution-type">商业服务</span>
+                <p class="institution-desc">促进商业发展、提供商务对接和行业交流的商会组织。</p>
+                <ul class="institution-services">
+                    <li>商务对接服务</li>
+                    <li>行业交流活动</li>
+                    <li>商业培训</li>
+                    <li>市场信息共享</li>
+                </ul>
+                <a href="https://www.ccci.org.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="business">
+                <h3 class="institution-name">💼 帕福斯商会</h3>
+                <span class="institution-type">商业服务</span>
+                <p class="institution-desc">帕福斯地区商业促进组织，提供本地商业服务和支持。</p>
+                <ul class="institution-services">
+                    <li>本地商业对接</li>
+                    <li>区域市场信息</li>
+                    <li>商业网络建设</li>
+                    <li>创业指导</li>
+                </ul>
+                <a href="https://www.paphoschamber.com" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <!-- 法律服务 -->
+            <div class="institution-card" data-category="legal">
+                <h3 class="institution-name">⚖️ 塞浦路斯法律协会</h3>
+                <span class="institution-type">法律服务</span>
+                <p class="institution-desc">专业律师协会，提供法律咨询和合规服务。</p>
+                <ul class="institution-services">
+                    <li>法律咨询</li>
+                    <li>合同审查</li>
+                    <li>合规指导</li>
+                    <li>争议解决</li>
+                </ul>
+                <a href="https://www.cyprusbarassociation.org" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="legal">
+                <h3 class="institution-name">⚖️ 塞浦路斯公证人协会</h3>
+                <span class="institution-type">法律服务</span>
+                <p class="institution-desc">提供公证、认证和法律文件服务的专业机构。</p>
+                <ul class="institution-services">
+                    <li>文件公证</li>
+                    <li>法律认证</li>
+                    <li>合同见证</li>
+                    <li>翻译服务</li>
+                </ul>
+                <a href="https://www.notaries.org.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <!-- 金融服务 -->
+            <div class="institution-card" data-category="finance">
+                <h3 class="institution-name">📊 塞浦路斯会计师协会</h3>
+                <span class="institution-type">金融服务</span>
+                <p class="institution-desc">专业会计师组织，提供会计、审计和税务服务。</p>
+                <ul class="institution-services">
+                    <li>会计服务</li>
+                    <li>财务审计</li>
+                    <li>税务筹划</li>
+                    <li>财务咨询</li>
+                </ul>
+                <a href="https://www.icpac.org.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="finance">
+                <h3 class="institution-name">📊 塞浦路斯中央银行</h3>
+                <span class="institution-type">金融服务</span>
+                <p class="institution-desc">塞浦路斯金融监管机构，负责银行监管和货币政策。</p>
+                <ul class="institution-services">
+                    <li>银行牌照申请</li>
+                    <li>金融监管政策</li>
+                    <li>外汇管理</li>
+                    <li>支付系统监管</li>
+                </ul>
+                <a href="https://www.centralbank.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="finance">
+                <h3 class="institution-name">📊 塞浦路斯证券交易所</h3>
+                <span class="institution-type">金融服务</span>
+                <p class="institution-desc">塞浦路斯证券交易市场，提供股票、债券等交易服务。</p>
+                <ul class="institution-services">
+                    <li>股票上市</li>
+                    <li>债券发行</li>
+                    <li>投资服务</li>
+                    <li>市场数据</li>
+                </ul>
+                <a href="https://www.cse.com.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <!-- 教育机构 -->
+            <div class="institution-card" data-category="education">
+                <h3 class="institution-name">🎓 塞浦路斯科技大学</h3>
+                <span class="institution-type">教育机构</span>
+                <p class="institution-desc">塞浦路斯领先的技术大学，提供科研合作和人才培养。</p>
+                <ul class="institution-services">
+                    <li>科研合作</li>
+                    <li>人才培养</li>
+                    <li>技术转让</li>
+                    <li>实习机会</li>
+                </ul>
+                <a href="https://www.cut.ac.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="education">
+                <h3 class="institution-name">🎓 塞浦路斯大学</h3>
+                <span class="institution-type">教育机构</span>
+                <p class="institution-desc">塞浦路斯最大的公立大学，提供全面的学术研究和教育服务。</p>
+                <ul class="institution-services">
+                    <li>学术研究</li>
+                    <li>继续教育</li>
+                    <li>校企合作</li>
+                    <li>人才推荐</li>
+                </ul>
+                <a href="https://www.ucy.ac.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <!-- 创新支持 -->
+            <div class="institution-card" data-category="innovation">
+                <h3 class="institution-name">🚀 塞浦路斯研究创新基金会</h3>
+                <span class="institution-type">创新支持</span>
+                <p class="institution-desc">支持科研创新和创业的国家基金会。</p>
+                <ul class="institution-services">
+                    <li>研发资金支持</li>
+                    <li>创新项目孵化</li>
+                    <li>创业指导</li>
+                    <li>技术转移</li>
+                </ul>
+                <a href="https://www.research.org.cy" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="innovation">
+                <h3 class="institution-name">🚀 塞浦路斯创业中心</h3>
+                <span class="institution-type">创新支持</span>
+                <p class="institution-desc">为初创企业提供孵化、加速和投资对接服务的创业支持机构。</p>
+                <ul class="institution-services">
+                    <li>创业孵化</li>
+                    <li>加速计划</li>
+                    <li>投资对接</li>
+                    <li>导师指导</li>
+                </ul>
+                <a href="https://www.cyprusstartups.com" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+
+            <div class="institution-card" data-category="innovation">
+                <h3 class="institution-name">🚀 欧盟企业网络塞浦路斯</h3>
+                <span class="institution-type">创新支持</span>
+                <p class="institution-desc">欧盟支持的企业服务网络，提供跨境商业合作支持。</p>
+                <ul class="institution-services">
+                    <li>跨境合作</li>
+                    <li>欧盟项目申请</li>
+                    <li>商业配对</li>
+                    <li>市场准入咨询</li>
+                </ul>
+                <a href="https://www.een.ec.europa.eu" target="_blank" class="institution-link">访问官网 →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.institution-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterInstitutions() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const cards = document.querySelectorAll('.institution-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent || card.innerText;
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
