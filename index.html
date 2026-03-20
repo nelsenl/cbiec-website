@@ -3,333 +3,780 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBIEC Cyprus - 濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</title>
+    <title>塞浦路斯企业落地服务平台 | CBIEC Cyprus Ltd</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #f5f7fa; }
+        body { font-family: 'Arial', 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; }
         
-        /* 璇█鏄剧ず鎺у埗 */
-        [data-lang] { display: none; }
-        [data-lang="zh"] { display: inline; }
-        html[lang="en"] [data-lang="zh"], html[lang="el"] [data-lang="zh"] { display: none !important; }
-        html[lang="en"] [data-lang="en"] { display: inline !important; }
-        html[lang="el"] [data-lang="el"] { display: inline !important; }
-        html[lang="zh-CN"] [data-lang="zh"] { display: inline !important; }
+        /* 顶部导航 */
+        .top-bar {
+            background: #1a3a5c;
+            color: white;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lang-switch { display: flex; gap: 15px; }
+        .lang-switch a { color: white; text-decoration: none; cursor: pointer; }
+        .lang-switch a:hover { color: #4fc3f7; }
         
-        .top-bar { background: #0d1f33; color: white; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-        .top-info { display: flex; gap: 25px; }
-        .top-info span { display: flex; align-items: center; gap: 6px; }
+        /* 导航栏 */
+        .navbar {
+            background: white;
+            padding: 20px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a3a5c;
+        }
+        .logo span { color: #4fc3f7; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #1a3a5c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #4fc3f7; }
         
-        .main-header { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; max-width: 1600px; margin: 0 auto; }
+        /* Hero 区域 */
+        .hero {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #4fc3f7;
+            color: #1a3a5c;
+        }
+        .btn-primary:hover {
+            background: #29b6f6;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-secondary:hover {
+            background: white;
+            color: #1a3a5c;
+        }
         
-        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-        .logo-img { width: 60px; height: 60px; }
-        .logo-img img { width: 100%; height: 100%; object-fit: contain; }
-        .logo-text h1 { color: #0033A0; font-size: 24px; font-weight: bold; margin: 0; }
-        .logo-text p { color: #666; font-size: 12px; margin: 3px 0 0 0; }
+        /* 关于我们 */
+        .about {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #1a3a5c;
+            margin-bottom: 50px;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        .about-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #4fc3f7;
+        }
+        .about-card h3 {
+            color: #1a3a5c;
+            margin-bottom: 15px;
+        }
         
-        .nav-menu { display: flex; list-style: none; gap: 2px; }
-        .nav-menu a { display: block; padding: 10px 16px; color: #0033A0; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 5px; transition: all 0.3s; }
-        .nav-menu a:hover { background: #FFC000; color: #0033A0; }
+        /* 服务项目 */
+        .services {
+            background: #f8f9fa;
+            padding: 80px 5%;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            color: #1a3a5c;
+            margin-bottom: 15px;
+        }
         
-        .lang-switch { display: flex; gap: 8px; }
-        .lang-switch button { padding: 6px 12px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.3s; }
-        .lang-switch button:hover { background: #0033A0; color: white; border-color: #0033A0; }
-        .lang-switch button.active { background: #0033A0; color: white; border-color: #0033A0; }
+        /* 政策支持 */
+        .policies {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .policy-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        .policy-card h4 {
+            color: #1a3a5c;
+            margin-bottom: 15px;
+        }
+        .policy-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .policy-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .policy-card li:before {
+            content: "✓";
+            color: #4fc3f7;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
         
-        .hero { position: relative; height: 600px; background: linear-gradient(135deg, #0033A0 0%, #0055D4 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>'); }
-        .hero-content { position: relative; text-align: center; color: white; max-width: 900px; padding: 0 20px; z-index: 1; }
-        .hero h2 { font-size: 48px; margin-bottom: 25px; font-weight: bold; }
-        .hero p { font-size: 20px; margin-bottom: 35px; opacity: 0.95; }
-        .btn-primary { display: inline-block; padding: 16px 45px; background: #FFC000; color: #0033A0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255, 192, 0, 0.3); }
-        .btn-primary:hover { background: #FFD540; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 192, 0, 0.4); }
+        /* 联系我们 */
+        .contact {
+            background: #1a3a5c;
+            color: white;
+            padding: 80px 5%;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #4fc3f7;
+        }
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        .contact-icon {
+            font-size: 24px;
+            color: #4fc3f7;
+        }
         
-        .main-content { max-width: 1600px; margin: 0 auto; padding: 80px 5%; }
-        .section-title { text-align: center; font-size: 36px; color: #0033A0; margin-bottom: 60px; font-weight: bold; }
+        /* 合作机构 */
+        .partners {
+            padding: 80px 5%;
+            background: #f8f9fa;
+        }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .partner-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid #4fc3f7;
+        }
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .partner-card h4 {
+            color: #1a3a5c;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .partner-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .partner-link {
+            display: inline-block;
+            color: #4fc3f7;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .partner-link:hover {
+            color: #1a3a5c;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #0d1f33;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
         
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
-        .service-card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border-top: 4px solid #0033A0; }
-        .service-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,51,160,0.15); border-top-color: #FFC000; }
-        .service-icon { font-size: 60px; margin-bottom: 20px; }
-        .service-card h3 { color: #0033A0; margin-bottom: 18px; font-size: 22px; font-weight: bold; }
-        .service-card p { color: #666; line-height: 1.8; font-size: 15px; }
-        
-        .stats-section { background: linear-gradient(135deg, #0033A0 0%, #0055D4 100%); color: white; padding: 80px 5%; }
-        .stats-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; text-align: center; }
-        .stat-number { font-size: 60px; font-weight: bold; color: #FFC000; margin-bottom: 15px; }
-        .stat-label { font-size: 16px; opacity: 0.95; }
-        
-        .footer { background: #0d1f33; color: white; padding: 60px 5% 30px; }
-        .footer-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
-        .footer-col h4 { color: #FFC000; margin-bottom: 20px; font-size: 18px; font-weight: bold; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 12px; }
-        .footer-col a { color: white; text-decoration: none; opacity: 0.85; transition: opacity 0.3s; }
-        .footer-col a:hover { opacity: 1; }
-        .footer-bottom { max-width: 1600px; margin: 0 auto; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center; opacity: 0.75; font-size: 14px; }
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .nav-links { display: none; }
+            .cta-buttons { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
+    <!-- 顶部语言栏 -->
     <div class="top-bar">
-        <div class="top-info">
-            <span>馃摓 +357-96001919</span>
-            <span>鉁夛笍 lian@cbiec.com</span>
-            <span>馃搷 59, Poseidonos Ave, Paphos, Cyprus</span>
+        <div>📞 +357-96001919 | ✉️ lian@cbiec.com</div>
+        <div class="lang-switch">
+            <a onclick="switchLang('zh')">中文</a>
+            <a onclick="switchLang('en')">English</a>
+            <a onclick="switchLang('el')">Ελληνικά</a>
         </div>
     </div>
 
-    <header class="main-header">
-        <div class="header-container">
-            <a href="#" class="logo">
-                <div class="logo-img">
-                    <img src="images/CBIEC-Logo.jpg" alt="CBIEC Logo">
-                </div>
-                <div class="logo-text">
-                    <h1>
-                        <span data-lang="zh">CBIEC Cyprus</span>
-                        <span data-lang="en">CBIEC Cyprus</span>
-                        <span data-lang="el">CBIEC 螝蠉蟺蟻慰蟼</span>
-                    </h1>
-                    <p>
-                        <span data-lang="zh">濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</span>
-                        <span data-lang="en">Cyprus Business Landing Platform</span>
-                        <span data-lang="el">螤位伪蟿蠁蠈蟻渭伪 螘纬魏伪蟿维蟽蟿伪蟽畏蟼 螘蟺喂蠂蔚喂蟻萎蟽蔚蠅谓</span>
-                    </p>
-                </div>
-            </a>
-            
-            <ul class="nav-menu">
-                <li><a href="#home"><span data-lang="zh">棣栭〉</span><span data-lang="en">Home</span><span data-lang="el">螒蟻蠂喂魏萎</span></a></li>
-                <li><a href="#services"><span data-lang="zh">鏈嶅姟</span><span data-lang="en">Services</span><span data-lang="el">违蟺畏蟻蔚蟽委蔚蟼</span></a></li>
-                <li><a href="#about"><span data-lang="zh">鍏充簬</span><span data-lang="en">About</span><span data-lang="el">危蠂蔚蟿喂魏维</span></a></li>
-                <li><a href="#contact"><span data-lang="zh">鑱旂郴</span><span data-lang="en">Contact</span><span data-lang="el">螘蟺喂魏慰喂谓蠅谓委伪</span></a></li>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">CBIEC <span>Cyprus</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" data-zh="首页" data-en="Home" data-el="Αρχική">首页</a></li>
+                <li><a href="#about" data-zh="关于我们" data-en="About Us" data-el="Σχετικά">关于我们</a></li>
+                <li><a href="#services" data-zh="服务项目" data-en="Services" data-el="Υπηρεσίες">服务项目</a></li>
+                <li><a href="#visa" data-zh="签证移民" data-en="Visa & Immigration" data-el="Θεώρηση & Μετανάστευση">签证移民</a></li>
+                <li><a href="#policies" data-zh="政策支持" data-en="Policies" data-el="Πολιτικές">政策支持</a></li>
+                <li><a href="#industries" data-zh="行业方案" data-en="Industries" data-el="Βιομηχανίες">行业方案</a></li>
+                <li><a href="#news" data-zh="新闻中心" data-en="News" data-el="Νέα">新闻中心</a></li>
+                <li><a href="institutions.html" data-zh="合作机构" data-en="Partners" data-el="Συνεργάτες">合作机构</a></li>
+                <li><a href="cases.html" data-zh="成功案例" data-en="Cases" data-el="Υποθέσεις">成功案例</a></li>
+                <li><a href="faq.html" data-zh="常见问题" data-en="FAQ" data-el="Συχνές Ερωτήσεις">常见问题</a></li>
+                <li><a href="#contact" data-zh="联系我们" data-en="Contact" data-el="Επικοινωνία">联系我们</a></li>
             </ul>
-            
-            <div class="lang-switch">
-                <button class="active" onclick="setLang('zh')">涓枃</button>
-                <button onclick="setLang('en')">EN</button>
-                <button onclick="setLang('el')">EL</button>
-            </div>
         </div>
-    </header>
+    </nav>
 
+    <!-- Hero 区域 -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h2>
-                <span data-lang="zh">鍔╁姏涓浗浼佷笟钀藉湴濉炴郸璺柉</span>
-                <span data-lang="en">Helping Chinese Companies Land in Cyprus</span>
-                <span data-lang="el">螔慰畏胃蠋谓蟿伪蟼 螝喂谓蔚味喂魏苇蟼 螘蟺喂蠂蔚喂蟻萎蟽蔚喂蟼</span>
-            </h2>
-            <p>
-                <span data-lang="zh">涓€绔欏紡鍑烘捣鏈嶅姟骞冲彴 | 涓撲笟鍚堣 | 鏈湴鍖栨敮鎸?| 8 骞?+ 缁忛獙</span>
-                <span data-lang="en">One-stop Service Platform | Professional | Local Support | 8+ Years</span>
-                <span data-lang="el">螣位慰魏位畏蟻蠅渭苇谓畏 螤位伪蟿蠁蠈蟻渭伪 | 螘蟺伪纬纬蔚位渭伪蟿喂魏萎 | 韦慰蟺喂魏萎 违蟺慰蟽蟿萎蟻喂尉畏</span>
-            </p>
-            <a href="#contact" class="btn-primary">
-                <span data-lang="zh">绔嬪嵆鍜ㄨ</span>
-                <span data-lang="en">Contact Now</span>
-                <span data-lang="el">螘蟺喂魏慰喂谓蠅谓萎蟽蟿蔚</span>
-            </a>
+        <h1 data-zh="塞浦路斯企业落地服务平台" data-en="Cyprus Business Landing Platform" data-el="Πλατφόρμα Εγκατάστασης Επιχειρήσεων">塞浦路斯企业落地服务平台</h1>
+        <p data-zh="帮助中国高新技术企业落地欧洲的一站式服务平台" data-en="One-stop service platform for Chinese high-tech enterprises landing in Europe" data-el="Ολοκληρωμένη πλατφόρμα υπηρεσιών για κινεζικές επιχειρήσεις υψηλής τεχνολογίας">帮助中国高新技术企业落地欧洲的一站式服务平台</p>
+        <div class="cta-buttons">
+            <a href="#contact" class="btn btn-primary" data-zh="立即咨询" data-en="Contact Now" data-el="Επικοινωνήστε">立即咨询</a>
+            <a href="#services" class="btn btn-secondary" data-zh="了解服务" data-en="Our Services" data-el="Οι Υπηρεσίες Μας">了解服务</a>
         </div>
     </section>
 
-    <section class="main-content" id="services">
-        <h2 class="section-title">
-            <span data-lang="zh">鎴戜滑鐨勬湇鍔?/span>
-            <span data-lang="en">Our Services</span>
-            <span data-lang="el">螣喂 违蟺畏蟻蔚蟽委蔚蟼 螠伪蟼</span>
-        </h2>
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <h2 class="section-title" data-zh="关于我们" data-en="About Us" data-el="Σχετικά Με Εμάς">关于我们</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3 data-zh="公司简介" data-en="Company Profile" data-el="Προφίλ Εταιρείας">公司简介</h3>
+                <p data-zh="CBIEC Cyprus Ltd 成立于 2016 年，是专注于帮助中国高新技术企业落地塞浦路斯和欧洲市场的专业服务机构。" data-en="CBIEC Cyprus Ltd, established in 2016, is a professional service organization focused on helping Chinese high-tech enterprises land in Cyprus and the European market." data-el="Η CBIEC Cyprus Ltd, ιδρύθηκε το 2016, είναι επαγγελματικός οργανισμός υπηρεσιών που εστιάζει στη βοήθεια κινεζικών επιχειρήσεων υψηλής τεχνολογίας">CBIEC Cyprus Ltd 成立于 2016 年，是专注于帮助中国高新技术企业落地塞浦路斯和欧洲市场的专业服务机构。</p>
+            </div>
+            <div class="about-card">
+                <h3 data-zh="公司信息" data-en="Company Info" data-el="Πληροφορίες Εταιρείας">公司信息</h3>
+                <p><strong data-zh="公司注册号：" data-en="Reg. No: " data-el="Αρ. Εγγραφής: ">公司注册号：</strong>HE 352690</p>
+                <p><strong data-zh="成立时间：" data-en="Established: " data-el="Ιδρύθηκε: ">成立时间：</strong>2016 年</p>
+                <p><strong data-zh="办公地址：" data-en="Address: " data-el="Διεύθυνση: ">办公地址：</strong>59, Poseidonos Avenue A104, 8042 Paphos, Cyprus</p>
+            </div>
+            <div class="about-card">
+                <h3 data-zh="核心优势" data-en="Core Advantages" data-el="Πυρηνικά Πλεονεκτήματα">核心优势</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li data-zh="✓ 8 年+ 本地经验" data-en="✓ 8+ Years Local Experience" data-el="✓ 8+ Χρόνια Τοπικής Εμπειρίας">✓ 8 年 + 本地经验</li>
+                    <li data-zh="✓ 专业服务团队" data-en="✓ Professional Team" data-el="✓ Επαγγελματική Ομάδα">✓ 专业服务团队</li>
+                    <li data-zh="✓ 政府合作关系" data-en="✓ Government Relations" data-el="✓ Κυβερνητικές Σχέσεις">✓ 政府合作关系</li>
+                    <li data-zh="✓ 一站式解决方案" data-en="✓ One-stop Solution" data-el="✓ Ολοκληρωμένη Λύση">✓ 一站式解决方案</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务项目 -->
+    <section class="services" id="services">
+        <h2 class="section-title" data-zh="服务项目" data-en="Our Services" data-el="Οι Υπηρεσίες Μας">服务项目</h2>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">馃彚</div>
-                <h3>
-                    <span data-lang="zh">浼佷笟娉ㄥ唽</span>
-                    <span data-lang="en">Company Registration</span>
-                    <span data-lang="el">螘纬纬蟻伪蠁萎 螘蟿伪喂蟻蔚委伪蟼</span>
-                </h3>
-                <p>
-                    <span data-lang="zh">蹇€熷畬鎴愬娴﹁矾鏂叕鍙告敞鍐岋紝鍖呮嫭绋庡姟鐧昏銆侀摱琛屽紑鎴风瓑涓€绔欏紡鏈嶅姟锛屾渶蹇?7 涓伐浣滄棩瀹屾垚銆?/span>
-                    <span data-lang="en">Fast Cyprus company registration with tax ID, bank account, completed in 7 working days.</span>
-                    <span data-lang="el">螕蟻萎纬慰蟻畏 蔚纬纬蟻伪蠁萎 蔚蟿伪喂蟻蔚委伪蟼 渭蔚 蠁慰蟻慰位慰纬喂魏蠈 伪蟻喂胃渭蠈, 蟿蟻伪蟺蔚味喂魏蠈 位慰纬伪蟻喂伪蟽渭蠈 蟽蔚 7 畏渭苇蟻蔚蟼.</span>
-                </p>
+                <div class="service-icon">🏢</div>
+                <h3 data-zh="企业注册" data-en="Company Registration" data-el="Εγγραφή Εταιρείας">企业注册</h3>
+                <p data-zh="快速完成塞浦路斯公司注册，包括税务登记、银行开户等一站式服务，最快 7 个工作日完成。" data-en="Fast completion of Cyprus company registration, including tax registration, bank account opening, etc. Completed in 7 working days." data-el="Γρήγορη ολοκλήρωση εγγραφής εταιρείας Κύπρου, συμπεριλαμβανομένης φορολογικής εγγραφής, ανοίγματος τραπεζικού λογαριασμού">快速完成塞浦路斯公司注册，包括税务登记、银行开户等一站式服务，最快 7 个工作日完成。</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">鈿栵笍</div>
-                <h3>
-                    <span data-lang="zh">鍚堣鍜ㄨ</span>
-                    <span data-lang="en">Compliance Consulting</span>
-                    <span data-lang="el">危蠀渭尾慰蠀位蔚蠀蟿喂魏萎 危蠀渭渭蠈蟻蠁蠅蟽畏蟼</span>
-                </h3>
-                <p>
-                    <span data-lang="zh">鎻愪緵涓撲笟鐨勬硶寰嬨€佺◣鍔°€佷汉鍔涜祫婧愬悎瑙勫挩璇紝纭繚浼佷笟鍦ㄥ娴﹁矾鏂悎娉曞悎瑙勭粡钀ャ€?/span>
-                    <span data-lang="en">Professional legal, tax, and HR compliance consulting for legal operation in Cyprus.</span>
-                    <span data-lang="el">螘蟺伪纬纬蔚位渭伪蟿喂魏萎 谓慰渭喂魏萎, 蠁慰蟻慰位慰纬喂魏萎 魏伪喂 蟽蠀渭尾慰蠀位蔚蠀蟿喂魏萎 HR 纬喂伪 谓蠈渭喂渭畏 位蔚喂蟿慰蠀蟻纬委伪.</span>
-                </p>
+                <div class="service-icon">⚖️</div>
+                <h3 data-zh="合规咨询" data-en="Compliance Consulting" data-el="Συμβουλευτική Συμμόρφωσης">合规咨询</h3>
+                <p data-zh="提供专业的法律、税务、人力资源合规咨询，确保企业在塞浦路斯合法合规经营。" data-en="Professional legal, tax, and HR compliance consulting to ensure legal operation in Cyprus." data-el="Επαγγελματική νομική, φορολογική και συμβουλευτική συμμόρφωσης HR">提供专业的法律、税务、人力资源合规咨询，确保企业在塞浦路斯合法合规经营。</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">馃實</div>
-                <h3>
-                    <span data-lang="zh">钀藉湴鏈嶅姟</span>
-                    <span data-lang="en">Landing Services</span>
-                    <span data-lang="el">违蟺畏蟻蔚蟽委蔚蟼 螘纬魏伪蟿维蟽蟿伪蟽畏蟼</span>
-                </h3>
-                <p>
-                    <span data-lang="zh">鍔炲叕鍦哄湴绉熻祦銆佸憳宸ユ嫑鑱樸€佹湰鍦拌祫婧愬鎺ョ瓑鍏ㄦ柟浣嶈惤鍦版敮鎸侊紝璁╂偍鏃犲咖寮€灞曚笟鍔°€?/span>
-                    <span data-lang="en">Office rental, recruitment, local resource docking for comprehensive support.</span>
-                    <span data-lang="el">螘谓慰喂魏委伪蟽畏 纬蟻伪蠁蔚委慰蠀, 蟺蟻慰蟽位萎蠄蔚喂蟼, 蟿慰蟺喂魏慰委 蟺蠈蟻慰喂 纬喂伪 慰位慰魏位畏蟻蠅渭苇谓畏 蠀蟺慰蟽蟿萎蟻喂尉畏.</span>
-                </p>
+                <div class="service-icon">🌍</div>
+                <h3 data-zh="落地服务" data-en="Landing Services" data-el="Υπηρεσίες Εγκατάστασης">落地服务</h3>
+                <p data-zh="办公场地租赁、员工招聘、本地资源对接等全方位落地支持，让您无忧开展业务。" data-en="Comprehensive landing support including office rental, recruitment, local resource docking." data-el="Ολοκληρωμένη υποστήριξη εγκατάστασης συμπεριλαμβανομένης ενοικίασης γραφείου">办公场地租赁、员工招聘、本地资源对接等全方位落地支持，让您无忧开展业务。</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">馃捈</div>
-                <h3>
-                    <span data-lang="zh">鍟嗗姟鎷撳睍</span>
-                    <span data-lang="en">Business Development</span>
-                    <span data-lang="el">螒谓维蟺蟿蠀尉畏 螘蟺喂蠂蔚喂蟻萎蟽蔚蠅谓</span>
-                </h3>
-                <p>
-                    <span data-lang="zh">甯姪瀵规帴娆ф床甯傚満璧勬簮锛屾嫇灞曚笟鍔＄綉缁滐紝鍙傚姞琛屼笟灞曚細锛屾彁鍗囧搧鐗屽奖鍝嶅姏銆?/span>
-                    <span data-lang="en">European market resources, business network, industry exhibitions, brand enhancement.</span>
-                    <span data-lang="el">螘蠀蟻蠅蟺伪蠆魏慰委 蟺蠈蟻慰喂, 蔚蟺喂蠂蔚喂蟻畏渭伪蟿喂魏蠈 未委魏蟿蠀慰, 蔚魏胃苇蟽蔚喂蟼, 蔚谓委蟽蠂蠀蟽畏 渭维蟻魏伪蟼.</span>
-                </p>
+                <div class="service-icon">💼</div>
+                <h3 data-zh="商务拓展" data-en="Business Development" data-el="Ανάπτυξη Επιχειρήσεων">商务拓展</h3>
+                <p data-zh="帮助对接欧洲市场资源，拓展业务网络，参加行业展会，提升品牌影响力。" data-en="Help docking European market resources, expanding business network, participating in industry exhibitions." data-el="Βοήθεια σύνδεσης με ευρωπαϊκούς πόρους αγοράς">帮助对接欧洲市场资源，拓展业务网络，参加行业展会，提升品牌影响力。</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">馃搳</div>
-                <h3>
-                    <span data-lang="zh">璐㈠姟鏈嶅姟</span>
-                    <span data-lang="en">Financial Services</span>
-                    <span data-lang="el">螣喂魏慰谓慰渭喂魏苇蟼 违蟺畏蟻蔚蟽委蔚蟼</span>
-                </h3>
-                <p>
-                    <span data-lang="zh">浠ｇ悊璁拌处銆佺◣鍔＄敵鎶ャ€佸勾搴﹀璁＄瓑涓撲笟璐㈠姟鏈嶅姟锛岀‘淇濊储鍔″悎瑙勩€?/span>
-                    <span data-lang="en">Bookkeeping, tax filing, annual audit and other professional financial services.</span>
-                    <span data-lang="el">韦萎蟻畏蟽畏 尾喂尾位委蠅谓, 蠁慰蟻慰位慰纬喂魏苇蟼 未畏位蠋蟽蔚喂蟼, 蔚蟿萎蟽喂慰蟼 苇位蔚纬蠂慰蟼 魏伪喂 维位位蔚蟼 蠀蟺畏蟻蔚蟽委蔚蟼.</span>
-                </p>
+                <div class="service-icon">📊</div>
+                <h3 data-zh="财务服务" data-en="Financial Services" data-el="Οικονομικές Υπηρεσίες">财务服务</h3>
+                <p data-zh="代理记账、税务申报、年度审计等专业财务服务，确保财务合规。" data-en="Professional financial services including bookkeeping, tax filing, annual audit." data-el="Επαγγελματικές οικονομικές υπηρεσίες συμπεριλαμβανομένης τήρησης βιβλίων">代理记账、税务申报、年度审计等专业财务服务，确保财务合规。</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">馃懃</div>
-                <h3>
-                    <span data-lang="zh">浜哄姏璧勬簮</span>
-                    <span data-lang="en">Human Resources</span>
-                    <span data-lang="el">螒谓胃蟻蠋蟺喂谓慰喂 螤蠈蟻慰喂</span>
-                </h3>
-                <p>
-                    <span data-lang="zh">宸ヤ綔绛捐瘉鍔炵悊銆佸憳宸ユ嫑鑱樸€佽柂閰鐞嗙瓑浜哄姏璧勬簮鏈嶅姟锛岃В鍐崇敤宸ラ毦棰樸€?/span>
-                    <span data-lang="en">Work visa, recruitment, salary management and other HR services.</span>
-                    <span data-lang="el">螁未蔚喂伪 蔚蟻纬伪蟽委伪蟼, 蟺蟻慰蟽位萎蠄蔚喂蟼, 未喂伪蠂蔚委蟻喂蟽畏 渭喂蟽胃蠋谓 魏伪喂 维位位蔚蟼 蠀蟺畏蟻蔚蟽委蔚蟼 HR.</span>
-                </p>
+                <div class="service-icon">👥</div>
+                <h3 data-zh="人力资源" data-en="Human Resources" data-el="Ανθρώπινοι Πόροι">人力资源</h3>
+                <p data-zh="工作签证办理、员工招聘、薪酬管理等人力资源服务，解决用工难题。" data-en="HR services including work visa, recruitment, salary management." data-el="Υπηρεσίες HR συμπεριλαμβανομένης άδειας εργασίας">工作签证办理、员工招聘、薪酬管理等人力资源服务，解决用工难题。</p>
             </div>
         </div>
     </section>
 
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div>
-                <div class="stat-number">500+</div>
-                <div class="stat-label">
-                    <span data-lang="zh">鏈嶅姟瀹㈡埛</span>
-                    <span data-lang="en">Clients Served</span>
-                    <span data-lang="el">螘尉蠀蟺畏蟻蔚蟿慰蠉渭蔚谓慰喂 螤蔚位维蟿蔚蟼</span>
+    <!-- 行业方案 -->
+    <section class="services" id="industries" style="background: white;">
+        <h2 class="section-title" data-zh="行业解决方案" data-en="Industry Solutions" data-el="Λύσεις Ανά Βιομηχανία">行业解决方案</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3 data-zh="人工智能" data-en="Artificial Intelligence" data-el="Τεχνητή Νοημοσύνη">人工智能</h3>
+                <p data-zh="为 AI 企业提供欧盟市场准入、数据合规、知识产权保护等一站式服务。" data-en="One-stop services for AI enterprises including EU market access, data compliance, IP protection." data-el="Ολοκληρωμένες υπηρεσίες για επιχειρήσεις AI">为 AI 企业提供欧盟市场准入、数据合规、知识产权保护等一站式服务。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💊</div>
+                <h3 data-zh="生物医药" data-en="Biopharmaceutical" data-el="Βιοφαρμακευτική">生物医药</h3>
+                <p data-zh="协助生物医药企业完成欧盟 EMA 认证、临床试验申请、产品注册等。" data-en="Assist biopharma companies with EU EMA certification, clinical trials, product registration." data-el="Βοήθεια φαρμακευτικών εταιρειών">协助生物医药企业完成欧盟 EMA 认证、临床试验申请、产品注册等。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎮</div>
+                <h3 data-zh="游戏娱乐" data-en="Gaming & Entertainment" data-el="Παιχνίδια & Ψυχαγωγία">游戏娱乐</h3>
+                <p data-zh="帮助游戏企业获得欧盟发行许可、本地化运营、支付接入等服务。" data-en="Help gaming companies with EU distribution license, localization, payment integration." data-el="Βοήθεια εταιρειών παιχνιδιών">帮助游戏企业获得欧盟发行许可、本地化运营、支付接入等服务。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3 data-zh="跨境电商" data-en="Cross-border E-commerce" data-el="Διασυνοριακό Ηλεκτρονικό Εμπόριο">跨境电商</h3>
+                <p data-zh="为电商企业提供欧洲仓储、物流合作、税务合规、支付解决方案。" data-en="Provide European warehousing, logistics, tax compliance, payment solutions for e-commerce." data-el="Παροχή υπηρεσιών για ηλεκτρονικό εμπόριο">为电商企业提供欧洲仓储、物流合作、税务合规、支付解决方案。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏭</div>
+                <h3 data-zh="智能制造" data-en="Smart Manufacturing" data-el="Έξυπνη Μεταποίηση">智能制造</h3>
+                <p data-zh="协助制造企业建立欧洲生产基地、CE 认证、设备进口、本地招聘。" data-en="Assist manufacturers with European production base, CE certification, equipment import." data-el="Βοήθεια μεταποιητικών εταιρειών">协助制造企业建立欧洲生产基地、CE 认证、设备进口、本地招聘。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3 data-zh="金融科技" data-en="FinTech" data-el="Χρηματοοικονομική Τεχνολογία">金融科技</h3>
+                <p data-zh="帮助金融科技企业获得欧盟支付牌照、合规咨询、系统部署等。" data-en="Help FinTech companies with EU payment license, compliance consulting, system deployment." data-el="Βοήθεια FinTech εταιρειών">帮助金融科技企业获得欧盟支付牌照、合规咨询、系统部署等。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 签证与移民 -->
+    <section style="background: #f8f9fa; padding: 80px 5%;" id="visa">
+        <h2 class="section-title" data-zh="签证与移民服务" data-en="Visa & Immigration Services" data-el="Υπηρεσίες Θεώρησης & Μετανάστευσης">签证与移民服务</h2>
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 48px; margin-bottom: 15px;">💼</div>
+                    <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">工作签证</h3>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">为外籍员工办理塞浦路斯工作许可和居留许可，快速审批通道。</p>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 工作许可证申请</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 居留许可办理</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 家属陪同签证</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 续签和变更服务</li>
+                    </ul>
+                </div>
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🏠</div>
+                    <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">永久居留</h3>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">通过投资移民项目获得塞浦路斯永久居留权，快速审批。</p>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 投资移民申请</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 永居卡办理</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 入籍申请指导</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 律师全程陪同</li>
+                    </ul>
+                </div>
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🌍</div>
+                    <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">数字游民签证</h3>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">欧盟批准的数字游民签证，允许远程工作者在塞浦路斯居住和工作。</p>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 数字游民签证申请</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 最长 2 年居留</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 欧盟申根区通行</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 税收优惠政策</li>
+                    </ul>
+                </div>
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 48px; margin-bottom: 15px;">👨‍👩‍👧</div>
+                    <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">家庭团聚</h3>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">协助办理配偶、子女、父母的家庭团聚签证和居留许可。</p>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 配偶团聚签证</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 子女陪同签证</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 父母探亲签证</li>
+                        <li style="padding: 8px 0; padding-left: 25px; position: relative; color: #555;">✓ 家属工作许可</li>
+                    </ul>
                 </div>
             </div>
-            <div>
-                <div class="stat-number">98%</div>
-                <div class="stat-label">
-                    <span data-lang="zh">瀹㈡埛婊℃剰搴?/span>
-                    <span data-lang="en">Client Satisfaction</span>
-                    <span data-lang="el">螜魏伪谓慰蟺慰委畏蟽畏 螤蔚位伪蟿蠋谓</span>
+
+            <!-- 签证类型对比表 -->
+            <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 40px;">
+                <h3 style="color: #1a3a5c; margin-bottom: 30px; text-align: center; font-size: 24px;">签证类型对比</h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 15px; border: 1px solid #e0e0e0; text-align: left; color: #1a3a5c;">签证类型</th>
+                                <th style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #1a3a5c;">有效期</th>
+                                <th style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #1a3a5c;">审批时间</th>
+                                <th style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #1a3a5c;">工作要求</th>
+                                <th style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #1a3a5c;">家属陪同</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; color: #555;">📌 工作签证</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">1-2 年</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">2-3 个月</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">需要雇主</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">✅ 可以</td>
+                            </tr>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; color: #555;">📌 数字游民签证</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">最长 2 年</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">1-2 个月</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">远程工作</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">✅ 可以</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; color: #555;">📌 投资移民</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">永久</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">2-3 个月</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">投资要求</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">✅ 可以</td>
+                            </tr>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; color: #555;">📌 创业签证</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">1-2 年</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">2-3 个月</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">创办公司</td>
+                                <td style="padding: 15px; border: 1px solid #e0e0e0; text-align: center; color: #555;">✅ 可以</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div>
-                <div class="stat-number">8+</div>
-                <div class="stat-label">
-                    <span data-lang="zh">骞存湰鍦扮粡楠?/span>
-                    <span data-lang="en">Years Local Experience</span>
-                    <span data-lang="el">围蟻蠈谓喂伪 韦慰蟺喂魏萎蟼 螘渭蟺蔚喂蟻委伪蟼</span>
-                </div>
-            </div>
-            <div>
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">
-                    <span data-lang="zh">鍏ㄥぉ鍊欐敮鎸?/span>
-                    <span data-lang="en">24/7 Support</span>
-                    <span data-lang="el">24/7 违蟺慰蟽蟿萎蟻喂尉畏</span>
+
+            <!-- 申请流程 -->
+            <div style="margin-top: 50px;">
+                <h3 style="color: #1a3a5c; margin-bottom: 30px; text-align: center; font-size: 24px;">签证申请流程</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: #4fc3f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">1</div>
+                        <h4 style="color: #1a3a5c; margin-bottom: 10px;">咨询评估</h4>
+                        <p style="color: #666; font-size: 14px;">免费评估您的条件和需求</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: #4fc3f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">2</div>
+                        <h4 style="color: #1a3a5c; margin-bottom: 10px;">准备材料</h4>
+                        <p style="color: #666; font-size: 14px;">协助准备所有必需文件</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: #4fc3f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">3</div>
+                        <h4 style="color: #1a3a5c; margin-bottom: 10px;">提交申请</h4>
+                        <p style="color: #666; font-size: 14px;">向移民局提交完整申请</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: #4fc3f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">4</div>
+                        <h4 style="color: #1a3a5c; margin-bottom: 10px;">等待审批</h4>
+                        <p style="color: #666; font-size: 14px;">跟踪审批进度</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: #4fc3f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">5</div>
+                        <h4 style="color: #1a3a5c; margin-bottom: 10px;">获得签证</h4>
+                        <p style="color: #666; font-size: 14px;">领取签证和居留卡</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer" id="contact">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>
-                    <span data-lang="zh">鍏充簬鎴戜滑</span>
-                    <span data-lang="en">About Us</span>
-                    <span data-lang="el">危蠂蔚蟿喂魏维 螠蔚 螘渭维蟼</span>
-                </h4>
-                <p>
-                    <span data-lang="zh">CBIEC Cyprus Ltd 鎴愮珛浜?2016 骞达紝鏄笓娉ㄤ簬甯姪涓浗楂樻柊鎶€鏈紒涓氳惤鍦板娴﹁矾鏂拰娆ф床甯傚満鐨勪笓涓氭湇鍔℃満鏋勩€傚凡甯姪 500+ 涓浗浼佷笟鎴愬姛钀藉湴娆ф床銆?/span>
-                    <span data-lang="en">CBIEC Cyprus Ltd, established in 2016, is a professional service organization focused on helping Chinese high-tech enterprises land in Cyprus and Europe. Helped 500+ companies.</span>
-                    <span data-lang="el">螚 CBIEC Cyprus Ltd 喂未蟻蠉胃畏魏蔚 蟿慰 2016 魏伪喂 蔚蟽蟿喂维味蔚喂 蟽蟿畏 尾慰萎胃蔚喂伪 魏喂谓蔚味喂魏蠋谓 蔚蟺喂蠂蔚喂蟻萎蟽蔚蠅谓. 螔慰萎胃畏蟽蔚 500+ 蔚蟿伪喂蟻蔚委蔚蟼.</span>
-                </p>
+    <!-- 数据统计 -->
+    <section style="background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%); color: white; padding: 80px 5%;">
+        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;">
+            <div>
+                <div style="font-size: 48px; font-weight: bold; margin-bottom: 10px;">500+</div>
+                <div style="opacity: 0.9; font-size: 16px;" data-zh="服务客户" data-en="Clients Served" data-el="Εξυπηρετούμενοι Πελάτες">服务客户</div>
             </div>
-            <div class="footer-col">
-                <h4>
-                    <span data-lang="zh">蹇€熼摼鎺?/span>
-                    <span data-lang="en">Quick Links</span>
-                    <span data-lang="el">螕蟻萎纬慰蟻慰喂 危蠉谓未蔚蟽渭慰喂</span>
-                </h4>
+            <div>
+                <div style="font-size: 48px; font-weight: bold; margin-bottom: 10px;">98%</div>
+                <div style="opacity: 0.9; font-size: 16px;" data-zh="客户满意度" data-en="Client Satisfaction" data-el="Ικανοποίηση Πελατών">客户满意度</div>
+            </div>
+            <div>
+                <div style="font-size: 48px; font-weight: bold; margin-bottom: 10px;">8 年+</div>
+                <div style="opacity: 0.9; font-size: 16px;" data-zh="本地经验" data-en="Local Experience" data-el="Τοπική Εμπειρία">本地经验</div>
+            </div>
+            <div>
+                <div style="font-size: 48px; font-weight: bold; margin-bottom: 10px;">24/7</div>
+                <div style="opacity: 0.9; font-size: 16px;" data-zh="全天候支持" data-en="24/7 Support" data-el="24/7 Υποστήριξη">全天候支持</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 政策支持 -->
+    <section class="policies" id="policies">
+        <h2 class="section-title" data-zh="高科技企业政策支持" data-en="High-Tech Enterprise Policies" data-el="Πολιτικές Επιχειρήσεων Υψηλής Τεχνολογίας">高科技企业政策支持</h2>
+        <div class="policy-grid">
+            <div class="policy-card">
+                <h4 data-zh="📌 税收优惠" data-en="📌 Tax Incentives" data-el="📌 Φορολογικά Κίνητρα">📌 税收优惠</h4>
                 <ul>
-                    <li><a href="#services"><span data-lang="zh">鏈嶅姟椤圭洰</span><span data-lang="en">Services</span><span data-lang="el">违蟺畏蟻蔚蟽委蔚蟼</span></a></li>
-                    <li><a href="#about"><span data-lang="zh">鍏充簬鎴戜滑</span><span data-lang="en">About Us</span><span data-lang="el">危蠂蔚蟿喂魏维 螠蔚 螘渭维蟼</span></a></li>
-                    <li><a href="#contact"><span data-lang="zh">鑱旂郴鎴戜滑</span><span data-lang="en">Contact</span><span data-lang="el">螘蟺喂魏慰喂谓蠅谓委伪</span></a></li>
+                    <li data-zh="企业所得税率 12.5%（欧盟最低）" data-en="Corporate tax rate 12.5% (lowest in EU)" data-el="Φορολογικός συντελεστής 12.5%">企业所得税率 12.5%（欧盟最低）</li>
+                    <li data-zh="研发费用加计扣除" data-en="R&D expense super deduction" data-en="R&D expense super deduction">研发费用加计扣除</li>
+                    <li data-zh="知识产权收入免税" data-en="IP income tax exemption" data-en="IP income tax exemption">知识产权收入免税</li>
+                    <li data-zh="股息红利免税" data-en="Dividend tax exemption" data-en="Dividend tax exemption">股息红利免税</li>
                 </ul>
             </div>
-            <div class="footer-col">
-                <h4>
-                    <span data-lang="zh">鑱旂郴鏂瑰紡</span>
-                    <span data-lang="en">Contact Info</span>
-                    <span data-lang="el">螤位畏蟻慰蠁慰蟻委蔚蟼 螘蟺喂魏慰喂谓蠅谓委伪蟼</span>
-                </h4>
+            <div class="policy-card">
+                <h4 data-zh="📌 投资激励" data-en="📌 Investment Incentives" data-el="📌 Κίνητρα Επενδύσεων">📌 投资激励</h4>
                 <ul>
-                    <li>馃搷 59, Poseidonos Avenue`n8042 Paphos Cyprus`nA104 Soho By Korantina Homes</li>
-                    <li>馃摓 +357-96001919</li>
-                    <li>鉁夛笍 lian@cbiec.com</li>
-                    <li>馃挰 WeChat: CBIEC_Cyprus</li>
+                    <li data-zh="高科技企业补贴" data-en="High-tech enterprise subsidies" data-en="High-tech enterprise subsidies">高科技企业补贴</li>
+                    <li data-zh="创新基金支持" data-en="Innovation fund support" data-en="Innovation fund support">创新基金支持</li>
+                    <li data-zh="欧盟项目对接" data-en="EU project docking" data-en="EU project docking">欧盟项目对接</li>
+                    <li data-zh="风险投资引导" data-en="Venture capital guidance" data-en="Venture capital guidance">风险投资引导</li>
+                </ul>
+            </div>
+            <div class="policy-card">
+                <h4 data-zh="📌 人才政策" data-en="📌 Talent Policies" data-el="📌 Πολιτικές Ταλέντων">📌 人才政策</h4>
+                <ul>
+                    <li data-zh="工作签证快速通道" data-en="Work visa fast track" data-en="Work visa fast track">工作签证快速通道</li>
+                    <li data-zh="高端人才税收优惠" data-en="High-end talent tax incentives" data-en="High-end talent tax incentives">高端人才税收优惠</li>
+                    <li data-zh="家属居留许可" data-en="Family residence permit" data-en="Family residence permit">家属居留许可</li>
+                    <li data-zh="子女教育支持" data-en="Children's education support" data-en="Children's education support">子女教育支持</li>
+                </ul>
+            </div>
+            <div class="policy-card">
+                <h4 data-zh="📌 机构合作" data-en="📌 Institutional Cooperation" data-el="📌 Θεσμική Συνεργασία">📌 机构合作</h4>
+                <ul>
+                    <li data-zh="塞浦路斯投资促进局" data-en="Cyprus Investment Promotion Agency" data-en="Cyprus Investment Promotion Agency">塞浦路斯投资促进局</li>
+                    <li data-zh="科技创新服务中心" data-en="Tech Innovation Service Center" data-en="Tech Innovation Service Center">科技创新服务中心</li>
+                    <li data-zh="欧盟企业网络" data-en="Enterprise Europe Network" data-en="Enterprise Europe Network">欧盟企业网络</li>
+                    <li data-zh="孵化器与加速器" data-en="Incubators & Accelerators" data-en="Incubators & Accelerators">孵化器与加速器</li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2016-2026 CBIEC Cyprus Ltd. All rights reserved. | 鍏徃娉ㄥ唽鍙凤細HE 352690</p>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact" id="contact">
+        <h2 class="section-title" style="color: white;" data-zh="联系我们" data-en="Contact Us" data-el="Επικοινωνήστε Μαζί Μας">联系我们</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3 data-zh="联系方式" data-en="Contact Info" data-el="Πληροφορίες Επικοινωνίας">联系方式</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong data-zh="地址：" data-en="Address: " data-el="Διεύθυνση: ">地址：</strong>
+                        <p>59, Poseidonos Avenue A104, 8042 Paphos, Cyprus</p>
+                        <p data-zh="Soho By Korantina Homes" data-en="Soho By Korantina Homes" data-el="Soho By Korantina Homes">Soho By Korantina Homes</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <strong data-zh="电话：" data-en="Phone: " data-el="Τηλέφωνο: ">电话：</strong>
+                        <p>+357-96001919</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <strong data-zh="邮箱：" data-en="Email: " data-el="Email: ">邮箱：</strong>
+                        <p>lian@cbiec.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div>
+                        <strong data-zh="微信：" data-en="WeChat: " data-el="WeChat: ">微信：</strong>
+                        <p>CBIEC_Cyprus</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <h3 data-zh="工作时间" data-en="Working Hours" data-el="Ώρες Λειτουργίας">工作时间</h3>
+                <p data-zh="周一至周五：9:00 - 17:00" data-en="Monday - Friday: 9:00 - 17:00" data-el="Δευτέρα - Παρασκευή: 9:00 - 17:00">周一至周五：9:00 - 17:00</p>
+                <p data-zh="周末及节假日：预约服务" data-en="Weekend & Holidays: By Appointment" data-el="Σαββατοκύριακο & Αργίες: Κατόπιν Ραντεβού">周末及节假日：预约服务</p>
+                <br>
+                <h3 data-zh="立即咨询" data-en="Contact Now" data-el="Επικοινωνήστε Τώρα">立即咨询</h3>
+                <p data-zh="填写下方信息，我们将尽快与您联系" data-en="Fill in the information below and we will contact you soon" data-el="Συμπληρώστε τις παρακάτω πληροφορίες">填写下方信息，我们将尽快与您联系</p>
+                <br>
+                <a href="mailto:lian@cbiec.com" class="btn btn-primary" style="background: white; color: #1a3a5c;" data-zh="发送邮件" data-en="Send Email" data-el="Αποστολή Email">发送邮件</a>
+            </div>
         </div>
+    </section>
+
+    <!-- 新闻中心 -->
+    <section style="background: #f8f9fa; padding: 80px 5%;" id="news">
+        <h2 class="section-title" data-zh="新闻中心" data-en="News Center" data-el="Κέντρο Ειδήσεων">新闻中心</h2>
+        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+            <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="color: #4fc3f7; font-size: 14px; margin-bottom: 15px;">📅 2026-03-20</div>
+                <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">塞浦路斯推出新的高科技企业税收优惠政策</h3>
+                <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">塞浦路斯政府宣布新的税收激励计划，为高科技企业提供更多税收减免和研发补贴...</p>
+                <a href="#" style="color: #4fc3f7; text-decoration: none; font-weight: 600;">阅读更多 →</a>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="color: #4fc3f7; font-size: 14px; margin-bottom: 15px;">📅 2026-03-15</div>
+                <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">欧盟批准塞浦路斯数字游民签证计划</h3>
+                <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">欧盟正式批准塞浦路斯数字游民签证，允许远程工作者在塞浦路斯居住和工作长达 2 年...</p>
+                <a href="#" style="color: #4fc3f7; text-decoration: none; font-weight: 600;">阅读更多 →</a>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="color: #4fc3f7; font-size: 14px; margin-bottom: 15px;">📅 2026-03-10</div>
+                <h3 style="color: #1a3a5c; margin-bottom: 15px; font-size: 20px;">塞浦路斯 - 中国直航航线即将开通</h3>
+                <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">塞浦路斯航空宣布将开通直飞中国主要城市的航线，进一步促进两国经贸往来...</p>
+                <a href="#" style="color: #4fc3f7; text-decoration: none; font-weight: 600;">阅读更多 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作机构 -->
+    <section class="partners">
+        <h2 class="section-title" data-zh="合作机构" data-en="Partner Institutions" data-el="Συνεργαζόμενοι Φορείς">合作机构</h2>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <h4 data-zh="🏛️ 塞浦路斯投资促进局" data-en="🏛️ Cyprus Investment Promotion Agency" data-el="🏛️ Υπηρεσία Προώθησης Επενδύσεων">🏛️ 塞浦路斯投资促进局</h4>
+                <p data-zh="官方投资促进机构，提供投资咨询和一站式服务" data-en="Official investment promotion agency" data-el="Επίσημη υπηρεσία προώθησης επενδύσεων">官方投资促进机构，提供投资咨询和一站式服务</p>
+                <a href="https://www.investincyprus.gov.cy" target="_blank" class="partner-link" data-zh="访问官网 →" data-en="Visit Website →" data-el="Επίσκεψη Ιστοσελίδας →">访问官网 →</a>
+            </div>
+            <div class="partner-card">
+                <h4 data-zh="💼 塞浦路斯商会" data-en="🏢 Cyprus Chamber of Commerce" data-el="🏢 Εμπορικό Επιμελητήριο Κύπρου">💼 塞浦路斯商会</h4>
+                <p data-zh="促进商业发展，提供商务对接服务" data-en="Promoting business development" data-en="Promoting business development">促进商业发展，提供商务对接服务</p>
+                <a href="https://www.ccci.org.cy" target="_blank" class="partner-link" data-zh="访问官网 →" data-en="Visit Website →" data-el="Επίσκεψη Ιστοσελίδας →">访问官网 →</a>
+            </div>
+            <div class="partner-card">
+                <h4 data-zh="⚖️ 塞浦路斯法律协会" data-en="⚖️ Cyprus Bar Association" data-el="⚖️ Δικηγορικός Σύλλογος Κύπρου">⚖️ 塞浦路斯法律协会</h4>
+                <p data-zh="专业法律服务，合规咨询" data-en="Professional legal services" data-en="Professional legal services">专业法律服务，合规咨询</p>
+                <a href="https://www.cyprusbarassociation.org" target="_blank" class="partner-link" data-zh="访问官网 →" data-en="Visit Website →" data-el="Επίσκεψη Ιστοσελίδας →">访问官网 →</a>
+            </div>
+            <div class="partner-card">
+                <h4 data-zh="📊 塞浦路斯会计师协会" data-en="📊 Institute of Certified Public Accountants" data-el="📊 Ινστιτούτο Εγκεκριμένων Λογιστών">📊 塞浦路斯会计师协会</h4>
+                <p data-zh="专业会计和审计服务" data-en="Professional accounting and audit services" data-en="Professional accounting and audit services">专业会计和审计服务</p>
+                <a href="https://www.icpac.org.cy" target="_blank" class="partner-link" data-zh="访问官网 →" data-en="Visit Website →" data-el="Επίσκεψη Ιστοσελίδας →">访问官网 →</a>
+            </div>
+            <div class="partner-card">
+                <h4 data-zh="🎓 塞浦路斯科技大学" data-en="🎓 Cyprus University of Technology" data-el="🎓 Τεχνολογικό Πανεπιστήμιο Κύπρου">🎓 塞浦路斯科技大学</h4>
+                <p data-zh="科研合作，人才培养" data-en="Research cooperation and talent training" data-en="Research cooperation and talent training">科研合作，人才培养</p>
+                <a href="https://www.cut.ac.cy" target="_blank" class="partner-link" data-zh="访问官网 →" data-en="Visit Website →" data-el="Επίσκεψη Ιστοσελίδας →">访问官网 →</a>
+            </div>
+            <div class="partner-card">
+                <h4 data-zh="🚀 塞浦路斯创新中心" data-en="🚀 Cyprus Innovation Center" data-el="🚀 Κέντρο Καινοτομίας Κύπρου">🚀 塞浦路斯创新中心</h4>
+                <p data-zh="创新孵化， startup 支持" data-en="Innovation incubation and startup support" data-en="Innovation incubation and startup support">创新孵化，startup 支持</p>
+                <a href="https://www.nefo.cy.gov.cy" target="_blank" class="partner-link" data-zh="访问官网 →" data-en="Visit Website →" data-el="Επίσκεψη Ιστοσελίδας →">访问官网 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>&copy; 2016-2026 CBIEC Cyprus Ltd. All rights reserved.</p>
+        <p data-zh="公司注册号：HE 352690" data-en="Reg. No: HE 352690" data-el="Αρ. Εγγραφής: HE 352690">公司注册号：HE 352690</p>
     </footer>
 
     <script>
-        function setLang(lang) {
-            // 璁剧疆 HTML lang 灞炴€?            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
-            
-            // 鏇存柊鎸夐挳鐘舵€?            document.querySelectorAll('.lang-switch button').forEach(btn => {
-                btn.classList.remove('active');
+        // 语言切换函数
+        const translations = {
+            zh: {},
+            en: {},
+            el: {}
+        };
+
+        function switchLang(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+                if (el.tagName === 'LI' && el.parentNode.tagName === 'UL') {
+                    el.textContent = el.getAttribute('data-' + lang);
+                } else {
+                    el.textContent = el.getAttribute('data-' + lang);
+                }
             });
-            event.target.classList.add('active');
             
-            // 淇濆瓨鍋忓ソ
-            localStorage.setItem('cbiec_lang', lang);
-            
-            console.log('Language:', lang, 'HTML lang:', document.documentElement.lang);
+            // 更新 HTML lang 属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : (lang === 'en' ? 'en' : 'el');
         }
         
-        // 椤甸潰鍔犺浇鏃舵仮澶嶈瑷€
-        window.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('cbiec_lang') || 'zh';
-            if (saved !== 'zh') {
-                document.documentElement.lang = saved === 'zh' ? 'zh-CN' : saved;
-                const buttons = document.querySelectorAll('.lang-switch button');
-                buttons.forEach(btn => btn.classList.remove('active'));
-                if (saved === 'en') buttons[1].classList.add('active');
-                if (saved === 'el') buttons[2].classList.add('active');
-            }
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
     </script>
 </body>
