@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIEC Cyprus Ltd - 濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; }
+        
+        /* 椤堕儴鏍?*/
+        .top-bar {
+            background: #0d1f33;
+            color: white;
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .top-info { display: flex; gap: 25px; flex-wrap: wrap; }
+        .top-info span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+        .top-social { display: flex; gap: 12px; }
+        .top-social a { color: white; text-decoration: none; font-size: 16px; transition: opacity 0.3s; }
+        .top-social a:hover { opacity: 0.8; }
+        
+        /* 涓诲鑸?*/
+        .main-header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+            padding: 15px 0;
+        }
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1a3a5c 0%, #4fc3f7 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        .logo-text h1 { color: #1a3a5c; font-size: 20px; font-weight: bold; margin: 0; }
+        .logo-text p { color: #666; font-size: 11px; margin: 3px 0 0 0; }
+        
+        .nav-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2px;
+            white-space: nowrap;
+            padding: 15px 0;
+        }
+        .nav-menu li { position: relative; }
+        .nav-menu > li > a {
+            display: block;
+            padding: 10px 16px;
+            color: #1a3a5c;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+        .nav-menu > li > a:hover { background: #4fc3f7; color: white; }
+        
+        /* 涓嬫媺鑿滃崟 */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1001;
+        }
+        .nav-menu li:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown a {
+            display: block;
+            padding: 12px 18px;
+            color: #333;
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+        .dropdown a:last-child { border-bottom: none; }
+        .dropdown a:hover { background: #f0f7ff; color: #1a3a5c; }
+        
+        /* 璇█鍒囨崲 */
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            padding: 15px 0;
+            flex-shrink: 0;
+        }
+        .lang-switch a {
+            color: #666;
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .lang-switch a:hover, .lang-switch a.active { background: #1a3a5c; color: white; border-color: #1a3a5c; }
+        
+        /* 澶氳瑷€鍐呭鏄剧ず鎺у埗 - 榛樿鏄剧ず涓枃 */
+        .lang-en, .lang-el { display: none !important; }
+        .lang-zh { display: inline !important; }
+        
+        html[lang="en"] .lang-zh { display: none !important; }
+        html[lang="en"] .lang-en { display: inline !important; }
+        html[lang="en"] .lang-el { display: none !important; }
+        
+        html[lang="el"] .lang-zh { display: none !important; }
+        html[lang="el"] .lang-en { display: none !important; }
+        html[lang="el"] .lang-el { display: inline !important; }
+        
+        html[lang="zh-CN"] .lang-zh { display: inline !important; }
+        html[lang="zh-CN"] .lang-en { display: none !important; }
+        html[lang="zh-CN"] .lang-el { display: none !important; }
+        
+        /* 杞挱鍥?*/
+        .hero-slider {
+            position: relative;
+            height: 550px;
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .slide.active { opacity: 1; }
+        .slide-content { text-align: center; color: white; max-width: 800px; padding: 0 20px; }
+        .slide-content h2 { font-size: 42px; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .slide-content p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        .slider-dots { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; }
+        .dot.active { background: white; width: 28px; border-radius: 5px; }
+        
+        /* 瀹㈡埛闂ㄦ埛 + 璇勪及琛?*/
+        .portal-assessment {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 70px 5%;
+            color: white;
+        }
+        .pa-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+        .pa-portal h2 { font-size: 32px; margin-bottom: 18px; }
+        .pa-portal p { font-size: 16px; opacity: 0.95; margin-bottom: 28px; line-height: 1.7; }
+        .pa-buttons { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 28px; }
+        .pa-btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            transition: transform 0.3s;
+        }
+        .pa-btn:hover { transform: translateY(-3px); }
+        .pa-btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .pa-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        .pa-feature {
+            background: rgba(255,255,255,0.12);
+            padding: 18px;
+            border-radius: 10px;
+        }
+        .pa-feature-icon { font-size: 28px; margin-bottom: 8px; }
+        .pa-feature-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .pa-feature-desc { font-size: 12px; opacity: 0.85; }
+        
+        .assessment-form {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            color: #333;
+        }
+        .assessment-form h3 { color: #1a3a5c; margin-bottom: 8px; font-size: 22px; }
+        .assessment-form p { color: #666; margin-bottom: 25px; font-size: 13px; }
+        .form-grid { display: grid; gap: 18px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group label { display: block; margin-bottom: 6px; color: #555; font-weight: 600; font-size: 13px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 11px;
+            border: 2px solid #e0e0e0;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .form-group textarea { resize: vertical; min-height: 90px; }
+        .form-submit {
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .form-submit:hover { transform: translateY(-2px); }
+        
+        /* 骞垮憡浣?*/
+        .ad-banner { padding: 35px 5%; background: #f8f9fa; }
+        .ad-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .ad-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .ad-card:hover { transform: translateY(-5px); }
+        .ad-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 42px;
+        }
+        .ad-content { padding: 20px; }
+        .ad-content h3 { color: #1a3a5c; margin-bottom: 8px; font-size: 17px; }
+        .ad-content p { color: #666; font-size: 13px; margin-bottom: 14px; line-height: 1.6; }
+        .ad-link { color: #4fc3f7; text-decoration: none; font-weight: 600; font-size: 13px; }
+        
+        /* 涓昏鍐呭 */
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 60px 5%; }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: #1a3a5c;
+            margin-bottom: 45px;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #4fc3f7;
+            margin: 18px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* 鏈嶅姟缃戞牸 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 55px;
+        }
+        .service-card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: #4fc3f7;
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.2);
+        }
+        .service-icon { font-size: 50px; margin-bottom: 18px; }
+        .service-card h3 { color: #1a3a5c; margin-bottom: 14px; font-size: 19px; }
+        .service-card p { color: #666; line-height: 1.7; font-size: 14px; }
+        
+        /* 椤佃剼 */
+        .footer { background: #0d1f33; color: white; padding: 50px 5% 25px; }
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            margin-bottom: 35px;
+        }
+        .footer-col h4 { color: #4fc3f7; margin-bottom: 18px; font-size: 17px; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 11px; }
+        .footer-col a { color: white; text-decoration: none; opacity: 0.85; transition: opacity 0.3s; font-size: 14px; }
+        .footer-col a:hover { opacity: 1; }
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            text-align: center;
+            opacity: 0.75;
+            font-size: 13px;
+        }
+        
+        /* 鍝嶅簲寮?*/
+        @media (max-width: 1024px) {
+            .nav-menu { gap: 1px; }
+            .nav-menu > li > a { padding: 10px 12px; font-size: 13px; }
+        }
+        @media (max-width: 768px) {
+            .top-bar { flex-direction: column; align-items: flex-start; }
+            .header-container { flex-wrap: wrap; }
+            .nav-wrapper { order: 3; width: 100%; overflow-x: auto; }
+            .nav-menu { padding: 12px 0; }
+            .lang-switch { order: 2; }
+            .slide-content h2 { font-size: 32px; }
+            .pa-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 椤堕儴鏍?-->
+    <div class="top-bar">
+        <div class="top-info">
+            <span>馃摓 +357-96001919</span>
+            <span>鉁夛笍 lian@cbiec.com</span>
+            <span>馃搷 59, Poseidonos Ave, Paphos</span>
+        </div>
+        <div class="top-social">
+            <a href="#">馃摌</a>
+            <a href="#">馃捈</a>
+            <a href="#">馃摳</a>
+        </div>
+    </div>
+
+    <!-- 涓诲鑸?-->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-img">馃彚</div>
+                <div class="logo-text">
+                    <h1>
+                        <span class="lang-zh">CBIEC Cyprus</span>
+                        <span class="lang-en">CBIEC Cyprus</span>
+                        <span class="lang-el">CBIEC 螝蠉蟺蟻慰蟼</span>
+                    </h1>
+                    <p>
+                        <span class="lang-zh">濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</span>
+                        <span class="lang-en">Cyprus Business Landing Platform</span>
+                        <span class="lang-el">螤位伪蟿蠁蠈蟻渭伪 螘纬魏伪蟿维蟽蟿伪蟽畏蟼 螘蟺喂蠂蔚喂蟻萎蟽蔚蠅谓</span>
+                    </p>
+                </div>
+            </a>
+            
+            <div class="nav-wrapper">
+                <ul class="nav-menu">
+                    <li><a href="#home"><span lang="zh-CN">棣栭〉</span><span lang="en">Home</span><span lang="el">螒蟻蠂喂魏萎</span></a></li>
+                    <li>
+                        <a href="#news"><span lang="zh-CN">鏂伴椈涓績 鈻?/span><span lang="en">News 鈻?/span><span lang="el">螡苇伪 鈻?/span></a>
+                        <div class="dropdown">
+                            <a href="#"><span lang="zh-CN">濉炴郸璧勮</span><span lang="en">Cyprus News</span><span lang="el">螘喂未萎蟽蔚喂蟼 螝蠉蟺蟻慰蠀</span></a>
+                            <a href="#"><span lang="zh-CN">鎴愬姛妗堜緥</span><span lang="en">Cases</span><span lang="el">违蟺慰胃苇蟽蔚喂蟼</span></a>
+                            <a href="#"><span lang="zh-CN">鎶曡祫鎸囧崡</span><span lang="en">Guide</span><span lang="el">螣未畏纬蠈蟼</span></a>
+                            <a href="#"><span lang="zh-CN">鐢熸椿鐧剧</span><span lang="en">Life</span><span lang="el">螙蠅萎</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#services">鏈嶅姟椤圭洰 鈻?/a>
+                        <div class="dropdown">
+                            <a href="#">浼佷笟娉ㄥ唽</a>
+                            <a href="#">鍚堣鍜ㄨ</a>
+                            <a href="#">钀藉湴鏈嶅姟</a>
+                            <a href="#">鍟嗗姟鎷撳睍</a>
+                            <a href="#">璐㈠姟鏈嶅姟</a>
+                            <a href="#">浜哄姏璧勬簮</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#visa">绛捐瘉绉绘皯 鈻?/a>
+                        <div class="dropdown">
+                            <a href="#">宸ヤ綔绛捐瘉</a>
+                            <a href="#">姘镐箙灞呯暀</a>
+                            <a href="#">鏁板瓧娓告皯</a>
+                            <a href="#">瀹跺涵鍥㈣仛</a>
+                            <a href="#">鎶曡祫绉绘皯</a>
+                        </div>
+                    </li>
+                    <li><a href="#policies">鏀跨瓥鏀寔</a></li>
+                    <li><a href="#industries">琛屼笟鏂规</a></li>
+                    <li><a href="institutions.html">鍚堜綔鏈烘瀯</a></li>
+                    <li><a href="cases.html">鎴愬姛妗堜緥</a></li>
+                    <li>
+                        <a href="#about">鍏充簬鎴戜滑 鈻?/a>
+                        <div class="dropdown">
+                            <a href="#">鍏徃绠€浠?/a>
+                            <a href="#">鍥㈤槦浠嬬粛</a>
+                            <a href="#">鍙戝睍鍘嗙▼</a>
+                            <a href="#">鑽ｈ獕璧勮川</a>
+                        </div>
+                    </li>
+                    <li><a href="#contact">鑱旂郴鎴戜滑</a></li>
+                </ul>
+            </div>
+            
+            <div class="lang-switch">
+                <a href="#" class="active" onclick="switchLang('zh'); return false;"><span lang="zh-CN">涓枃</span><span lang="en">CN</span><span lang="el">螝螡</span></a>
+                <a href="#" onclick="switchLang('en'); return false;"><span lang="zh-CN">EN</span><span lang="en">EN</span><span lang="el">EN</span></a>
+                <a href="#" onclick="switchLang('el'); return false;"><span lang="zh-CN">EL</span><span lang="en">EL</span><span lang="el">EL</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 杞挱鍥?-->
+    <section class="hero-slider" id="home">
+        <div class="slide active">
+            <div class="slide-content">
+                <h2>鍔╁姏涓浗浼佷笟钀藉湴濉炴郸璺柉</h2>
+                <p>涓€绔欏紡鍑烘捣鏈嶅姟骞冲彴 | 涓撲笟鍚堣 | 鏈湴鍖栨敮鎸?/p>
+                <a href="#contact" class="pa-btn">绔嬪嵆鍜ㄨ</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-content">
+                <h2>8 骞?+ 鏈湴缁忛獙</h2>
+                <p>宸插府鍔?500+ 涓浗浼佷笟鎴愬姛钀藉湴娆ф床</p>
+                <a href="cases.html" class="pa-btn">鏌ョ湅妗堜緥</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-content">
+                <h2>娆х洘鏈€浣庣◣鐜?12.5%</h2>
+                <p>浜彈濉炴郸璺柉绋庢敹浼樻儬鏀跨瓥</p>
+                <a href="#policies" class="pa-btn">浜嗚В鏀跨瓥</a>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <div class="dot active" onclick="changeSlide(0)"></div>
+            <div class="dot" onclick="changeSlide(1)"></div>
+            <div class="dot" onclick="changeSlide(2)"></div>
+        </div>
+    </section>
+
+    <!-- 瀹㈡埛闂ㄦ埛 + 鍦ㄧ嚎璇勪及 -->
+    <section class="portal-assessment">
+        <div class="pa-container">
+            <div class="pa-portal">
+                <h2>馃攼 瀹㈡埛闂ㄦ埛</h2>
+                <p>鐧诲綍瀹㈡埛闂ㄦ埛锛屾煡鐪嬫湇鍔¤繘搴︺€佷笅杞芥枃妗ｃ€佺鐞嗚鍗曘€佹帴鏀堕€氱煡銆?/p>
+                <div class="pa-buttons">
+                    <a href="portal.html" class="pa-btn">鐧诲綍闂ㄦ埛</a>
+                    <a href="#contact" class="pa-btn pa-btn-outline">娉ㄥ唽璐︽埛</a>
+                </div>
+                <div class="pa-features">
+                    <div class="pa-feature">
+                        <div class="pa-feature-icon">馃摝</div>
+                        <div class="pa-feature-title">鏈嶅姟杩涘害</div>
+                        <div class="pa-feature-desc">瀹炴椂璺熻釜</div>
+                    </div>
+                    <div class="pa-feature">
+                        <div class="pa-feature-icon">馃搧</div>
+                        <div class="pa-feature-title">鏂囨。涓嬭浇</div>
+                        <div class="pa-feature-desc">闅忔椂鑾峰彇</div>
+                    </div>
+                    <div class="pa-feature">
+                        <div class="pa-feature-icon">馃挰</div>
+                        <div class="pa-feature-title">娑堟伅閫氱煡</div>
+                        <div class="pa-feature-desc">鍗虫椂鎻愰啋</div>
+                    </div>
+                    <div class="pa-feature">
+                        <div class="pa-feature-icon">馃搵</div>
+                        <div class="pa-feature-title">璁㈠崟绠＄悊</div>
+                        <div class="pa-feature-desc">涓€鐩簡鐒?/div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="assessment-form">
+                <h3>馃摑 鍏嶈垂绉绘皯璇勪及</h3>
+                <p>濉啓浠ヤ笅淇℃伅锛?0 鍒嗛挓鍐呰幏寰椾笓涓氳瘎浼版姤鍛?/p>
+                <form class="form-grid" onsubmit="handleAssessment(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>濮撳悕 *</label>
+                            <input type="text" required placeholder="鎮ㄧ殑濮撳悕">
+                        </div>
+                        <div class="form-group">
+                            <label>鐢佃瘽 *</label>
+                            <input type="tel" required placeholder="鑱旂郴鐢佃瘽">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>閭 *</label>
+                        <input type="email" required placeholder="鎮ㄧ殑閭">
+                    </div>
+                    <div class="form-group">
+                        <label>鎰忓悜鏈嶅姟 *</label>
+                        <select required>
+                            <option value="">璇烽€夋嫨鏈嶅姟绫诲瀷</option>
+                            <option>馃彚 浼佷笟娉ㄥ唽</option>
+                            <option>馃捈 宸ヤ綔绛捐瘉</option>
+                            <option>馃彔 姘镐箙灞呯暀</option>
+                            <option>馃實 鏁板瓧娓告皯绛捐瘉</option>
+                            <option>馃挵 鎶曡祫绉绘皯</option>
+                            <option>鈿栵笍 鍚堣鍜ㄨ</option>
+                            <option>馃搳 璐㈠姟浠ｇ悊</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>棰勭畻鑼冨洿</label>
+                        <select>
+                            <option value="">璇烽€夋嫨棰勭畻</option>
+                            <option>鈧?,000 浠ヤ笅</option>
+                            <option>鈧?,000 - 鈧?0,000</option>
+                            <option>鈧?0,000 - 鈧?0,000</option>
+                            <option>鈧?0,000 - 鈧?00,000</option>
+                            <option>鈧?00,000 浠ヤ笂</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>璇︾粏闇€姹?/label>
+                        <textarea placeholder="璇锋弿杩版偍鐨勫叿浣撻渶姹?.."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">鎻愪氦璇勪及鐢宠</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 骞垮憡浣?-->
+    <section class="ad-banner">
+        <div class="ad-container">
+            <div class="ad-card">
+                <div class="ad-image">馃幆</div>
+                <div class="ad-content">
+                    <h3>鍏嶈垂鍜ㄨ鐑嚎</h3>
+                    <p>涓撲笟椤鹃棶涓€瀵逛竴鏈嶅姟</p>
+                    <a href="tel:+35796001919" class="ad-link">绔嬪嵆鎷ㄦ墦 鈫?/a>
+                </div>
+            </div>
+            <div class="ad-card">
+                <div class="ad-image">馃搵</div>
+                <div class="ad-content">
+                    <h3>鑾峰彇璇︾粏鏂规</h3>
+                    <p>瀹氬埗涓撳睘钀藉湴鏂规</p>
+                    <a href="#contact" class="ad-link">绔嬪嵆鑾峰彇 鈫?/a>
+                </div>
+            </div>
+            <div class="ad-card">
+                <div class="ad-image">馃捈</div>
+                <div class="ad-content">
+                    <h3>棰勭害瀹炲湴鑰冨療</h3>
+                    <p>瀹夋帓濉炴郸璺柉鑰冨療</p>
+                    <a href="#contact" class="ad-link">绔嬪嵆棰勭害 鈫?/a>
+                </div>
+            </div>
+            <div class="ad-card">
+                <div class="ad-image">馃搳</div>
+                <div class="ad-content">
+                    <h3>涓嬭浇鎶曡祫鎸囧崡</h3>
+                    <p>鍏嶈垂鑾峰彇鎶曡祫鎸囧崡</p>
+                    <a href="#" class="ad-link">绔嬪嵆涓嬭浇 鈫?/a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 鏈嶅姟椤圭洰 -->
+    <section class="main-content" id="services">
+        <h2 class="section-title">鎴戜滑鐨勬湇鍔?/h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">馃彚</div>
+                <h3>浼佷笟娉ㄥ唽</h3>
+                <p>蹇€熷畬鎴愬娴﹁矾鏂叕鍙告敞鍐岋紝鍖呮嫭绋庡姟鐧昏銆侀摱琛屽紑鎴风瓑涓€绔欏紡鏈嶅姟锛屾渶蹇?7 涓伐浣滄棩瀹屾垚銆?/p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">鈿栵笍</div>
+                <h3>鍚堣鍜ㄨ</h3>
+                <p>鎻愪緵涓撲笟鐨勬硶寰嬨€佺◣鍔°€佷汉鍔涜祫婧愬悎瑙勫挩璇紝纭繚浼佷笟鍦ㄥ娴﹁矾鏂悎娉曞悎瑙勭粡钀ャ€?/p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃實</div>
+                <h3>钀藉湴鏈嶅姟</h3>
+                <p>鍔炲叕鍦哄湴绉熻祦銆佸憳宸ユ嫑鑱樸€佹湰鍦拌祫婧愬鎺ョ瓑鍏ㄦ柟浣嶈惤鍦版敮鎸侊紝璁╂偍鏃犲咖寮€灞曚笟鍔°€?/p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃捈</div>
+                <h3>鍟嗗姟鎷撳睍</h3>
+                <p>甯姪瀵规帴娆ф床甯傚満璧勬簮锛屾嫇灞曚笟鍔＄綉缁滐紝鍙傚姞琛屼笟灞曚細锛屾彁鍗囧搧鐗屽奖鍝嶅姏銆?/p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃搳</div>
+                <h3>璐㈠姟鏈嶅姟</h3>
+                <p>浠ｇ悊璁拌处銆佺◣鍔＄敵鎶ャ€佸勾搴﹀璁＄瓑涓撲笟璐㈠姟鏈嶅姟锛岀‘淇濊储鍔″悎瑙勩€?/p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃懃</div>
+                <h3>浜哄姏璧勬簮</h3>
+                <p>宸ヤ綔绛捐瘉鍔炵悊銆佸憳宸ユ嫑鑱樸€佽柂閰鐞嗙瓑浜哄姏璧勬簮鏈嶅姟锛岃В鍐崇敤宸ラ毦棰樸€?/p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 椤佃剼 -->
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>鍏充簬鎴戜滑</h4>
+                <p style="opacity: 0.85; line-height: 1.7; font-size: 14px;">CBIEC Cyprus Ltd 鎴愮珛浜?2016 骞达紝鏄笓娉ㄤ簬甯姪涓浗楂樻柊鎶€鏈紒涓氳惤鍦板娴﹁矾鏂拰娆ф床甯傚満鐨勪笓涓氭湇鍔℃満鏋勩€?/p>
+            </div>
+            <div class="footer-col">
+                <h4>蹇€熼摼鎺?/h4>
+                <ul>
+                    <li><a href="#news">鏂伴椈涓績</a></li>
+                    <li><a href="#services">鏈嶅姟椤圭洰</a></li>
+                    <li><a href="#visa">绛捐瘉绉绘皯</a></li>
+                    <li><a href="cases.html">鎴愬姛妗堜緥</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>鏈嶅姟椤圭洰</h4>
+                <ul>
+                    <li><a href="#">浼佷笟娉ㄥ唽</a></li>
+                    <li><a href="#">鍚堣鍜ㄨ</a></li>
+                    <li><a href="#">宸ヤ綔绛捐瘉</a></li>
+                    <li><a href="#">璐㈠姟浠ｇ悊</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>鑱旂郴鏂瑰紡</h4>
+                <ul>
+                    <li style="font-size: 14px; opacity: 0.85; line-height: 1.8;">馃搷 59, Poseidonos Avenue`n8042 Paphos Cyprus`nA104 Soho By Korantina Homes</li>
+                    <li style="font-size: 14px; opacity: 0.85;">馃摓 +357-96001919</li>
+                    <li style="font-size: 14px; opacity: 0.85;">鉁夛笍 lian@cbiec.com</li>
+                    <li style="font-size: 14px; opacity: 0.85;">馃挰 WeChat: CBIEC_Cyprus</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2016-2026 CBIEC Cyprus Ltd. All rights reserved. | 鍏徃娉ㄥ唽鍙凤細HE 352690</p>
+        </div>
+    </footer>
+
+    <script>
+        // 璇█鍒囨崲鍔熻兘
+        let currentLang = 'zh';
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // 璁剧疆 HTML lang 灞炴€э紙鍏抽敭锛侊級
+            if (lang === 'zh') {
+                document.documentElement.lang = 'zh-CN';
+            } else if (lang === 'en') {
+                document.documentElement.lang = 'en';
+            } else if (lang === 'el') {
+                document.documentElement.lang = 'el';
+            }
+            
+            // 鏇存柊鎸夐挳鐘舵€?            const buttons = document.querySelectorAll('.lang-switch a');
+            buttons.forEach((btn, index) => {
+                btn.classList.remove('active');
+            });
+            
+            // 璁剧疆褰撳墠鎸夐挳涓?active
+            if (lang === 'zh') buttons[0].classList.add('active');
+            if (lang === 'en') buttons[1].classList.add('active');
+            if (lang === 'el') buttons[2].classList.add('active');
+            
+            // 淇濆瓨鍒?localStorage
+            localStorage.setItem('cbiec_lang', lang);
+            
+            console.log('Language switched to:', lang, 'HTML lang:', document.documentElement.lang);
+        }
+        
+        // 椤甸潰鍔犺浇鏃跺垵濮嬪寲璇█
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('cbiec_lang') || 'zh';
+            if (savedLang !== 'zh') {
+                switchLang(savedLang);
+            }
+        });
+        
+        // 杞挱鍥?        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        
+        function changeSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            changeSlide(currentSlide);
+        }, 5000);
+        
+        // 璇勪及琛ㄥ崟澶勭悊
+        function handleAssessment(e) {
+            e.preventDefault();
+            const messages = {
+                zh: '鉁?璇勪及鐢宠宸叉彁浜わ紒\n\n鎴戜滑鐨勪笓涓氶【闂皢鍦?30 鍒嗛挓鍐呴€氳繃鎮ㄧ暀涓嬬殑鑱旂郴鏂瑰紡涓庢偍鑱旂郴锛屽苟鎻愪緵璇︾粏鐨勮瘎浼版姤鍛娿€?,
+                en: '鉁?Assessment submitted!\n\nOur consultant will contact you within 30 minutes with a detailed report.',
+                el: '鉁?螚 伪尉喂慰位蠈纬畏蟽畏 蠀蟺慰尾位萎胃畏魏蔚!\n\n螣 蟽蠉渭尾慰蠀位蠈蟼 渭伪蟼 胃伪 蔚蟺喂魏慰喂谓蠅谓萎蟽蔚喂 渭伪味委 蟽伪蟼 蔚谓蟿蠈蟼 30 位蔚蟺蟿蠋谓.'
+            };
+            alert(messages[currentLang]);
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
