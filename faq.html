@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见问题 - CBIEC Cyprus Ltd</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', 'Microsoft YaHei', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        
+        .header {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .header h1 { font-size: 42px; margin-bottom: 15px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        
+        .faq {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 25px;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: bold;
+            color: #1a3a5c;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question:hover { background: #f0f7ff; }
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .faq-item.active .faq-answer {
+            padding: 25px;
+            max-height: 500px;
+        }
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 12px 30px;
+            background: #1a3a5c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover { background: #2c5f8d; }
+        
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .category-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #1a3a5c;
+            color: #1a3a5c;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-btn:hover, .category-btn.active {
+            background: #1a3a5c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="margin-bottom: 20px;">
+            <img src="images/CBIEC-Logo.jpg" alt="CBIEC Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 10px; padding: 5px;">
+        </div>
+        <h1>❓ 常见问题</h1>
+        <p>解答您关于塞浦路斯企业落地的所有疑问</p>
+    </div>
+
+    <div class="faq">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        
+        <div class="categories">
+            <button class="category-btn active" onclick="filterCategory('all')">全部</button>
+            <button class="category-btn" onclick="filterCategory('registration')">公司注册</button>
+            <button class="category-btn" onclick="filterCategory('tax')">税务</button>
+            <button class="category-btn" onclick="filterCategory('visa')">签证</button>
+            <button class="category-btn" onclick="filterCategory('bank')">银行</button>
+        </div>
+
+        <div class="faq-item" data-category="registration">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                注册塞浦路斯公司需要多长时间？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>通常情况下，注册塞浦路斯公司需要 7-10 个工作日。具体流程包括：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>公司名称核准（1-2 天）</li>
+                    <li>准备注册文件（2-3 天）</li>
+                    <li>提交注册申请（1-2 天）</li>
+                    <li>获得注册证书（3-4 天）</li>
+                </ul>
+                <p style="margin-top: 15px;">通过 CBIEC 的专业服务，最快可在 7 个工作日内完成全部注册流程。</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="registration">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                注册塞浦路斯公司需要哪些文件？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>注册塞浦路斯公司需要准备以下文件：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>公司名称（提供 3 个备选名称）</li>
+                    <li>董事和股东的护照复印件</li>
+                    <li>董事和股东的地址证明（水电费单或银行账单）</li>
+                    <li>公司注册资本信息（标准注册资本为€1000）</li>
+                    <li>公司经营范围说明</li>
+                    <li>注册地址（可由我们提供）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="tax">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                塞浦路斯的企业税率是多少？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>塞浦路斯的企业所得税率为<strong>12.5%</strong>，是欧盟最低的企业税率之一。</p>
+                <p style="margin-top: 15px;">此外，塞浦路斯还有以下税收优势：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>股息红利免税</li>
+                    <li>知识产权收入免税（IP Box 制度）</li>
+                    <li>研发费用加计扣除</li>
+                    <li>无资本利得税（证券交易）</li>
+                    <li>与 65 个国家签订避免双重征税协定</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="visa">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                如何申请塞浦路斯工作签证？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>申请塞浦路斯工作签证（居留许可）的流程：</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>在塞浦路斯注册公司</li>
+                    <li>公司获得营业执照</li>
+                    <li>提交工作签证申请</li>
+                    <li>提供相关文件（护照、无犯罪记录、体检报告等）</li>
+                    <li>等待审批（通常 2-3 个月）</li>
+                    <li>获得居留许可</li>
+                </ol>
+                <p style="margin-top: 15px;">通过 CBIEC 的专业服务，可以加快审批流程，并提供全程指导。</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="bank">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                在塞浦路斯开设公司银行账户需要什么？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>开设塞浦路斯公司银行账户需要：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>公司注册证书</li>
+                    <li>公司章程</li>
+                    <li>董事和股东身份证明</li>
+                    <li>董事和股东地址证明</li>
+                    <li>公司业务说明和预计交易量</li>
+                    <li>部分银行要求董事亲自到场</li>
+                </ul>
+                <p style="margin-top: 15px;">CBIEC 与多家塞浦路斯银行有合作关系，可以协助您快速开设银行账户。</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="tax">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                塞浦路斯公司需要缴纳哪些税？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>塞浦路斯公司主要涉及以下税种：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>企业所得税：</strong>12.5%（净利润）</li>
+                    <li><strong>增值税（VAT）：</strong>标准税率 19%</li>
+                    <li><strong>个人所得税：</strong>0-35%（累进税率）</li>
+                    <li><strong>社保：</strong>雇主 8.3%，雇员 8.3%</li>
+                </ul>
+                <p style="margin-top: 15px;">CBIEC 提供专业的税务筹划服务，帮助您合法降低税负。</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="registration">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                塞浦路斯公司的年维护费用是多少？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>塞浦路斯公司的年维护费用主要包括：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>公司注册处年费：€350</li>
+                    <li>注册地址费：€300-500/年</li>
+                    <li>秘书服务费：€500-1000/年</li>
+                    <li>审计费：€1000-3000/年（根据公司规模）</li>
+                    <li>税务申报费：€500-1000/年</li>
+                </ul>
+                <p style="margin-top: 15px;">总计约€3000-6000/年，具体费用根据公司情况而定。</p>
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="visa">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                家属可以随行吗？
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>是的，获得塞浦路斯工作签证后，家属可以随行：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>配偶可申请家属居留许可</li>
+                    <li>18 岁以下子女可申请家属居留许可</li>
+                    <li>家属可在塞浦路斯合法居住</li>
+                    <li>子女可享受塞浦路斯免费教育</li>
+                    <li>配偶在满足条件后可申请工作许可</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        function filterCategory(category) {
+            const items = document.querySelectorAll('.faq-item');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
