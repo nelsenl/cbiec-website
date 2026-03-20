@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIEC Cyprus - 濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f7fa; }
+        
+        /* 璇█鏄剧ず鎺у埗 */
+        [data-lang] { display: none; }
+        [data-lang="zh"] { display: inline; }
+        html[lang="en"] [data-lang="zh"], html[lang="el"] [data-lang="zh"] { display: none !important; }
+        html[lang="en"] [data-lang="en"] { display: inline !important; }
+        html[lang="el"] [data-lang="el"] { display: inline !important; }
+        html[lang="zh-CN"] [data-lang="zh"] { display: inline !important; }
+        
+        .top-bar { background: #0d1f33; color: white; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .top-info { display: flex; gap: 25px; }
+        .top-info span { display: flex; align-items: center; gap: 6px; }
+        
+        .main-header { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; max-width: 1600px; margin: 0 auto; }
+        
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo-img { width: 60px; height: 60px; }
+        .logo-img img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-text h1 { color: #0033A0; font-size: 24px; font-weight: bold; margin: 0; }
+        .logo-text p { color: #666; font-size: 12px; margin: 3px 0 0 0; }
+        
+        .nav-menu { display: flex; list-style: none; gap: 2px; }
+        .nav-menu a { display: block; padding: 10px 16px; color: #0033A0; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 5px; transition: all 0.3s; }
+        .nav-menu a:hover { background: #FFC000; color: #0033A0; }
+        
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-switch button { padding: 6px 12px; border: 1px solid #e0e0e0; background: white; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.3s; }
+        .lang-switch button:hover { background: #0033A0; color: white; border-color: #0033A0; }
+        .lang-switch button.active { background: #0033A0; color: white; border-color: #0033A0; }
+        
+        .hero { position: relative; height: 600px; background: linear-gradient(135deg, #0033A0 0%, #0055D4 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>'); }
+        .hero-content { position: relative; text-align: center; color: white; max-width: 900px; padding: 0 20px; z-index: 1; }
+        .hero h2 { font-size: 48px; margin-bottom: 25px; font-weight: bold; }
+        .hero p { font-size: 20px; margin-bottom: 35px; opacity: 0.95; }
+        .btn-primary { display: inline-block; padding: 16px 45px; background: #FFC000; color: #0033A0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255, 192, 0, 0.3); }
+        .btn-primary:hover { background: #FFD540; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 192, 0, 0.4); }
+        
+        .main-content { max-width: 1600px; margin: 0 auto; padding: 80px 5%; }
+        .section-title { text-align: center; font-size: 36px; color: #0033A0; margin-bottom: 60px; font-weight: bold; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
+        .service-card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border-top: 4px solid #0033A0; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,51,160,0.15); border-top-color: #FFC000; }
+        .service-icon { font-size: 60px; margin-bottom: 20px; }
+        .service-card h3 { color: #0033A0; margin-bottom: 18px; font-size: 22px; font-weight: bold; }
+        .service-card p { color: #666; line-height: 1.8; font-size: 15px; }
+        
+        .stats-section { background: linear-gradient(135deg, #0033A0 0%, #0055D4 100%); color: white; padding: 80px 5%; }
+        .stats-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; text-align: center; }
+        .stat-number { font-size: 60px; font-weight: bold; color: #FFC000; margin-bottom: 15px; }
+        .stat-label { font-size: 16px; opacity: 0.95; }
+        
+        .footer { background: #0d1f33; color: white; padding: 60px 5% 30px; }
+        .footer-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #FFC000; margin-bottom: 20px; font-size: 18px; font-weight: bold; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col a { color: white; text-decoration: none; opacity: 0.85; transition: opacity 0.3s; }
+        .footer-col a:hover { opacity: 1; }
+        .footer-bottom { max-width: 1600px; margin: 0 auto; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center; opacity: 0.75; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-info">
+            <span>馃摓 +357-96001919</span>
+            <span>鉁夛笍 lian@cbiec.com</span>
+            <span>馃搷 59, Poseidonos Ave, Paphos, Cyprus</span>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-img">
+                    <img src="images/CBIEC-Logo.jpg" alt="CBIEC Logo">
+                </div>
+                <div class="logo-text">
+                    <h1>
+                        <span data-lang="zh">CBIEC Cyprus</span>
+                        <span data-lang="en">CBIEC Cyprus</span>
+                        <span data-lang="el">CBIEC 螝蠉蟺蟻慰蟼</span>
+                    </h1>
+                    <p>
+                        <span data-lang="zh">濉炴郸璺柉浼佷笟钀藉湴鏈嶅姟骞冲彴</span>
+                        <span data-lang="en">Cyprus Business Landing Platform</span>
+                        <span data-lang="el">螤位伪蟿蠁蠈蟻渭伪 螘纬魏伪蟿维蟽蟿伪蟽畏蟼 螘蟺喂蠂蔚喂蟻萎蟽蔚蠅谓</span>
+                    </p>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#home"><span data-lang="zh">棣栭〉</span><span data-lang="en">Home</span><span data-lang="el">螒蟻蠂喂魏萎</span></a></li>
+                <li><a href="#services"><span data-lang="zh">鏈嶅姟</span><span data-lang="en">Services</span><span data-lang="el">违蟺畏蟻蔚蟽委蔚蟼</span></a></li>
+                <li><a href="#about"><span data-lang="zh">鍏充簬</span><span data-lang="en">About</span><span data-lang="el">危蠂蔚蟿喂魏维</span></a></li>
+                <li><a href="#contact"><span data-lang="zh">鑱旂郴</span><span data-lang="en">Contact</span><span data-lang="el">螘蟺喂魏慰喂谓蠅谓委伪</span></a></li>
+            </ul>
+            
+            <div class="lang-switch">
+                <button class="active" onclick="setLang('zh')">涓枃</button>
+                <button onclick="setLang('en')">EN</button>
+                <button onclick="setLang('el')">EL</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>
+                <span data-lang="zh">鍔╁姏涓浗浼佷笟钀藉湴濉炴郸璺柉</span>
+                <span data-lang="en">Helping Chinese Companies Land in Cyprus</span>
+                <span data-lang="el">螔慰畏胃蠋谓蟿伪蟼 螝喂谓蔚味喂魏苇蟼 螘蟺喂蠂蔚喂蟻萎蟽蔚喂蟼</span>
+            </h2>
+            <p>
+                <span data-lang="zh">涓€绔欏紡鍑烘捣鏈嶅姟骞冲彴 | 涓撲笟鍚堣 | 鏈湴鍖栨敮鎸?| 8 骞?+ 缁忛獙</span>
+                <span data-lang="en">One-stop Service Platform | Professional | Local Support | 8+ Years</span>
+                <span data-lang="el">螣位慰魏位畏蟻蠅渭苇谓畏 螤位伪蟿蠁蠈蟻渭伪 | 螘蟺伪纬纬蔚位渭伪蟿喂魏萎 | 韦慰蟺喂魏萎 违蟺慰蟽蟿萎蟻喂尉畏</span>
+            </p>
+            <a href="#contact" class="btn-primary">
+                <span data-lang="zh">绔嬪嵆鍜ㄨ</span>
+                <span data-lang="en">Contact Now</span>
+                <span data-lang="el">螘蟺喂魏慰喂谓蠅谓萎蟽蟿蔚</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="main-content" id="services">
+        <h2 class="section-title">
+            <span data-lang="zh">鎴戜滑鐨勬湇鍔?/span>
+            <span data-lang="en">Our Services</span>
+            <span data-lang="el">螣喂 违蟺畏蟻蔚蟽委蔚蟼 螠伪蟼</span>
+        </h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">馃彚</div>
+                <h3>
+                    <span data-lang="zh">浼佷笟娉ㄥ唽</span>
+                    <span data-lang="en">Company Registration</span>
+                    <span data-lang="el">螘纬纬蟻伪蠁萎 螘蟿伪喂蟻蔚委伪蟼</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">蹇€熷畬鎴愬娴﹁矾鏂叕鍙告敞鍐岋紝鍖呮嫭绋庡姟鐧昏銆侀摱琛屽紑鎴风瓑涓€绔欏紡鏈嶅姟锛屾渶蹇?7 涓伐浣滄棩瀹屾垚銆?/span>
+                    <span data-lang="en">Fast Cyprus company registration with tax ID, bank account, completed in 7 working days.</span>
+                    <span data-lang="el">螕蟻萎纬慰蟻畏 蔚纬纬蟻伪蠁萎 蔚蟿伪喂蟻蔚委伪蟼 渭蔚 蠁慰蟻慰位慰纬喂魏蠈 伪蟻喂胃渭蠈, 蟿蟻伪蟺蔚味喂魏蠈 位慰纬伪蟻喂伪蟽渭蠈 蟽蔚 7 畏渭苇蟻蔚蟼.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">鈿栵笍</div>
+                <h3>
+                    <span data-lang="zh">鍚堣鍜ㄨ</span>
+                    <span data-lang="en">Compliance Consulting</span>
+                    <span data-lang="el">危蠀渭尾慰蠀位蔚蠀蟿喂魏萎 危蠀渭渭蠈蟻蠁蠅蟽畏蟼</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">鎻愪緵涓撲笟鐨勬硶寰嬨€佺◣鍔°€佷汉鍔涜祫婧愬悎瑙勫挩璇紝纭繚浼佷笟鍦ㄥ娴﹁矾鏂悎娉曞悎瑙勭粡钀ャ€?/span>
+                    <span data-lang="en">Professional legal, tax, and HR compliance consulting for legal operation in Cyprus.</span>
+                    <span data-lang="el">螘蟺伪纬纬蔚位渭伪蟿喂魏萎 谓慰渭喂魏萎, 蠁慰蟻慰位慰纬喂魏萎 魏伪喂 蟽蠀渭尾慰蠀位蔚蠀蟿喂魏萎 HR 纬喂伪 谓蠈渭喂渭畏 位蔚喂蟿慰蠀蟻纬委伪.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃實</div>
+                <h3>
+                    <span data-lang="zh">钀藉湴鏈嶅姟</span>
+                    <span data-lang="en">Landing Services</span>
+                    <span data-lang="el">违蟺畏蟻蔚蟽委蔚蟼 螘纬魏伪蟿维蟽蟿伪蟽畏蟼</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">鍔炲叕鍦哄湴绉熻祦銆佸憳宸ユ嫑鑱樸€佹湰鍦拌祫婧愬鎺ョ瓑鍏ㄦ柟浣嶈惤鍦版敮鎸侊紝璁╂偍鏃犲咖寮€灞曚笟鍔°€?/span>
+                    <span data-lang="en">Office rental, recruitment, local resource docking for comprehensive support.</span>
+                    <span data-lang="el">螘谓慰喂魏委伪蟽畏 纬蟻伪蠁蔚委慰蠀, 蟺蟻慰蟽位萎蠄蔚喂蟼, 蟿慰蟺喂魏慰委 蟺蠈蟻慰喂 纬喂伪 慰位慰魏位畏蟻蠅渭苇谓畏 蠀蟺慰蟽蟿萎蟻喂尉畏.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃捈</div>
+                <h3>
+                    <span data-lang="zh">鍟嗗姟鎷撳睍</span>
+                    <span data-lang="en">Business Development</span>
+                    <span data-lang="el">螒谓维蟺蟿蠀尉畏 螘蟺喂蠂蔚喂蟻萎蟽蔚蠅谓</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">甯姪瀵规帴娆ф床甯傚満璧勬簮锛屾嫇灞曚笟鍔＄綉缁滐紝鍙傚姞琛屼笟灞曚細锛屾彁鍗囧搧鐗屽奖鍝嶅姏銆?/span>
+                    <span data-lang="en">European market resources, business network, industry exhibitions, brand enhancement.</span>
+                    <span data-lang="el">螘蠀蟻蠅蟺伪蠆魏慰委 蟺蠈蟻慰喂, 蔚蟺喂蠂蔚喂蟻畏渭伪蟿喂魏蠈 未委魏蟿蠀慰, 蔚魏胃苇蟽蔚喂蟼, 蔚谓委蟽蠂蠀蟽畏 渭维蟻魏伪蟼.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃搳</div>
+                <h3>
+                    <span data-lang="zh">璐㈠姟鏈嶅姟</span>
+                    <span data-lang="en">Financial Services</span>
+                    <span data-lang="el">螣喂魏慰谓慰渭喂魏苇蟼 违蟺畏蟻蔚蟽委蔚蟼</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">浠ｇ悊璁拌处銆佺◣鍔＄敵鎶ャ€佸勾搴﹀璁＄瓑涓撲笟璐㈠姟鏈嶅姟锛岀‘淇濊储鍔″悎瑙勩€?/span>
+                    <span data-lang="en">Bookkeeping, tax filing, annual audit and other professional financial services.</span>
+                    <span data-lang="el">韦萎蟻畏蟽畏 尾喂尾位委蠅谓, 蠁慰蟻慰位慰纬喂魏苇蟼 未畏位蠋蟽蔚喂蟼, 蔚蟿萎蟽喂慰蟼 苇位蔚纬蠂慰蟼 魏伪喂 维位位蔚蟼 蠀蟺畏蟻蔚蟽委蔚蟼.</span>
+                </p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">馃懃</div>
+                <h3>
+                    <span data-lang="zh">浜哄姏璧勬簮</span>
+                    <span data-lang="en">Human Resources</span>
+                    <span data-lang="el">螒谓胃蟻蠋蟺喂谓慰喂 螤蠈蟻慰喂</span>
+                </h3>
+                <p>
+                    <span data-lang="zh">宸ヤ綔绛捐瘉鍔炵悊銆佸憳宸ユ嫑鑱樸€佽柂閰鐞嗙瓑浜哄姏璧勬簮鏈嶅姟锛岃В鍐崇敤宸ラ毦棰樸€?/span>
+                    <span data-lang="en">Work visa, recruitment, salary management and other HR services.</span>
+                    <span data-lang="el">螁未蔚喂伪 蔚蟻纬伪蟽委伪蟼, 蟺蟻慰蟽位萎蠄蔚喂蟼, 未喂伪蠂蔚委蟻喂蟽畏 渭喂蟽胃蠋谓 魏伪喂 维位位蔚蟼 蠀蟺畏蟻蔚蟽委蔚蟼 HR.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">500+</div>
+                <div class="stat-label">
+                    <span data-lang="zh">鏈嶅姟瀹㈡埛</span>
+                    <span data-lang="en">Clients Served</span>
+                    <span data-lang="el">螘尉蠀蟺畏蟻蔚蟿慰蠉渭蔚谓慰喂 螤蔚位维蟿蔚蟼</span>
+                </div>
+            </div>
+            <div>
+                <div class="stat-number">98%</div>
+                <div class="stat-label">
+                    <span data-lang="zh">瀹㈡埛婊℃剰搴?/span>
+                    <span data-lang="en">Client Satisfaction</span>
+                    <span data-lang="el">螜魏伪谓慰蟺慰委畏蟽畏 螤蔚位伪蟿蠋谓</span>
+                </div>
+            </div>
+            <div>
+                <div class="stat-number">8+</div>
+                <div class="stat-label">
+                    <span data-lang="zh">骞存湰鍦扮粡楠?/span>
+                    <span data-lang="en">Years Local Experience</span>
+                    <span data-lang="el">围蟻蠈谓喂伪 韦慰蟺喂魏萎蟼 螘渭蟺蔚喂蟻委伪蟼</span>
+                </div>
+            </div>
+            <div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">
+                    <span data-lang="zh">鍏ㄥぉ鍊欐敮鎸?/span>
+                    <span data-lang="en">24/7 Support</span>
+                    <span data-lang="el">24/7 违蟺慰蟽蟿萎蟻喂尉畏</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>
+                    <span data-lang="zh">鍏充簬鎴戜滑</span>
+                    <span data-lang="en">About Us</span>
+                    <span data-lang="el">危蠂蔚蟿喂魏维 螠蔚 螘渭维蟼</span>
+                </h4>
+                <p>
+                    <span data-lang="zh">CBIEC Cyprus Ltd 鎴愮珛浜?2016 骞达紝鏄笓娉ㄤ簬甯姪涓浗楂樻柊鎶€鏈紒涓氳惤鍦板娴﹁矾鏂拰娆ф床甯傚満鐨勪笓涓氭湇鍔℃満鏋勩€傚凡甯姪 500+ 涓浗浼佷笟鎴愬姛钀藉湴娆ф床銆?/span>
+                    <span data-lang="en">CBIEC Cyprus Ltd, established in 2016, is a professional service organization focused on helping Chinese high-tech enterprises land in Cyprus and Europe. Helped 500+ companies.</span>
+                    <span data-lang="el">螚 CBIEC Cyprus Ltd 喂未蟻蠉胃畏魏蔚 蟿慰 2016 魏伪喂 蔚蟽蟿喂维味蔚喂 蟽蟿畏 尾慰萎胃蔚喂伪 魏喂谓蔚味喂魏蠋谓 蔚蟺喂蠂蔚喂蟻萎蟽蔚蠅谓. 螔慰萎胃畏蟽蔚 500+ 蔚蟿伪喂蟻蔚委蔚蟼.</span>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>
+                    <span data-lang="zh">蹇€熼摼鎺?/span>
+                    <span data-lang="en">Quick Links</span>
+                    <span data-lang="el">螕蟻萎纬慰蟻慰喂 危蠉谓未蔚蟽渭慰喂</span>
+                </h4>
+                <ul>
+                    <li><a href="#services"><span data-lang="zh">鏈嶅姟椤圭洰</span><span data-lang="en">Services</span><span data-lang="el">违蟺畏蟻蔚蟽委蔚蟼</span></a></li>
+                    <li><a href="#about"><span data-lang="zh">鍏充簬鎴戜滑</span><span data-lang="en">About Us</span><span data-lang="el">危蠂蔚蟿喂魏维 螠蔚 螘渭维蟼</span></a></li>
+                    <li><a href="#contact"><span data-lang="zh">鑱旂郴鎴戜滑</span><span data-lang="en">Contact</span><span data-lang="el">螘蟺喂魏慰喂谓蠅谓委伪</span></a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>
+                    <span data-lang="zh">鑱旂郴鏂瑰紡</span>
+                    <span data-lang="en">Contact Info</span>
+                    <span data-lang="el">螤位畏蟻慰蠁慰蟻委蔚蟼 螘蟺喂魏慰喂谓蠅谓委伪蟼</span>
+                </h4>
+                <ul>
+                    <li>馃搷 59, Poseidonos Avenue`n8042 Paphos Cyprus`nA104 Soho By Korantina Homes</li>
+                    <li>馃摓 +357-96001919</li>
+                    <li>鉁夛笍 lian@cbiec.com</li>
+                    <li>馃挰 WeChat: CBIEC_Cyprus</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2016-2026 CBIEC Cyprus Ltd. All rights reserved. | 鍏徃娉ㄥ唽鍙凤細HE 352690</p>
+        </div>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            // 璁剧疆 HTML lang 灞炴€?            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            
+            // 鏇存柊鎸夐挳鐘舵€?            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 淇濆瓨鍋忓ソ
+            localStorage.setItem('cbiec_lang', lang);
+            
+            console.log('Language:', lang, 'HTML lang:', document.documentElement.lang);
+        }
+        
+        // 椤甸潰鍔犺浇鏃舵仮澶嶈瑷€
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('cbiec_lang') || 'zh';
+            if (saved !== 'zh') {
+                document.documentElement.lang = saved === 'zh' ? 'zh-CN' : saved;
+                const buttons = document.querySelectorAll('.lang-switch button');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                if (saved === 'en') buttons[1].classList.add('active');
+                if (saved === 'el') buttons[2].classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
