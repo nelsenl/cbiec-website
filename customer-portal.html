@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塞浦路斯企业客户门户系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: #f5f7fa; }
+        
+        /* 登录页面 */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .login-header { text-align: center; margin-bottom: 30px; }
+        .login-header h1 { color: #1a3a5c; margin-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .login-btn {
+            width: 100%;
+            background: #4fc3f7;
+            color: #1a3a5c;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .login-btn:hover { background: #29b6f6; }
+        
+        /* 主界面 */
+        .dashboard { display: none; }
+        .navbar {
+            background: #1a3a5c;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sidebar {
+            width: 250px;
+            background: white;
+            position: fixed;
+            height: 100vh;
+            padding: 20px 0;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+        }
+        .menu-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+        .menu-item:hover, .menu-item.active {
+            background: #f0f7ff;
+            border-left-color: #4fc3f7;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .stat-number { font-size: 32px; font-weight: bold; color: #4fc3f7; }
+        .stat-label { color: #666; margin-top: 5px; }
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .service-list { list-style: none; }
+        .service-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .status-completed { background: #e8f5e9; color: #2e7d32; }
+        .status-processing { background: #fff3e0; color: #ef6c00; }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+    </style>
+</head>
+<body>
+    <!-- 登录页面 -->
+    <div class="login-container" id="loginPage">
+        <div class="login-header">
+            <h1>🏢 客户门户系统</h1>
+            <p>塞浦路斯企业服务管理系统</p>
+        </div>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>用户名</label>
+                <input type="text" id="username" placeholder="请输入用户名" required>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="password" placeholder="请输入密码" required>
+            </div>
+            <button type="submit" class="login-btn">登录</button>
+        </form>
+    </div>
+
+    <!-- 主界面 -->
+    <div class="dashboard" id="dashboard">
+        <nav class="navbar">
+            <div>🏢 塞浦路斯企业客户门户</div>
+            <div>
+                <span id="welcomeUser">欢迎，用户</span>
+                <button onclick="logout()" style="margin-left: 20px; padding: 5px 15px; cursor: pointer;">退出</button>
+            </div>
+        </nav>
+
+        <div class="sidebar">
+            <div class="menu-item active" onclick="showSection('overview')">📊 总览</div>
+            <div class="menu-item" onclick="showSection('services')">📦 我的服务</div>
+            <div class="menu-item" onclick="showSection('orders')">📋 订单管理</div>
+            <div class="menu-item" onclick="showSection('documents')">📁 文档中心</div>
+            <div class="menu-item" onclick="showSection('messages')">💬 消息中心</div>
+            <div class="menu-item" onclick="showSection('profile')">👤 个人中心</div>
+        </div>
+
+        <div class="main-content">
+            <!-- 总览 -->
+            <div id="overview">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">进行中服务</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">已完成服务</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">文档数量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">待处理消息</div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2>📦 最近服务</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div>
+                                <strong>🏢 企业注册服务</strong>
+                                <p style="color: #666; margin-top: 5px;">提交日期：2026-03-15</p>
+                            </div>
+                            <span class="status-badge status-processing">处理中</span>
+                        </li>
+                        <li class="service-item">
+                            <div>
+                                <strong>⚖️ 合规咨询服务</strong>
+                                <p style="color: #666; margin-top: 5px;">提交日期：2026-03-10</p>
+                            </div>
+                            <span class="status-badge status-completed">已完成</span>
+                        </li>
+                        <li class="service-item">
+                            <div>
+                                <strong>📊 财务代理服务</strong>
+                                <p style="color: #666; margin-top: 5px;">提交日期：2026-03-01</p>
+                            </div>
+                            <span class="status-badge status-completed">已完成</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 我的服务 -->
+            <div id="services" style="display: none;">
+                <div class="content-card">
+                    <h2>📦 我的服务</h2>
+                    <table style="width: 100%; margin-top: 20px;">
+                        <tr style="background: #f5f7fa;">
+                            <th style="padding: 12px; text-align: left;">服务名称</th>
+                            <th style="padding: 12px;">提交日期</th>
+                            <th style="padding: 12px;">状态</th>
+                            <th style="padding: 12px;">操作</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;">🏢 企业注册</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;">2026-03-15</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;"><span class="status-badge status-processing">处理中</span></td>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;"><button>查看详情</button></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;">⚖️ 合规咨询</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;">2026-03-10</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;"><span class="status-badge status-completed">已完成</span></td>
+                            <td style="padding: 12px; border-bottom: 1px solid #eee;"><button>查看详情</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 订单管理 -->
+            <div id="orders" style="display: none;">
+                <div class="content-card">
+                    <h2>📋 订单管理</h2>
+                    <p style="margin-top: 20px;">订单列表加载中...</p>
+                </div>
+            </div>
+
+            <!-- 文档中心 -->
+            <div id="documents" style="display: none;">
+                <div class="content-card">
+                    <h2>📁 文档中心</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div>📄 公司注册证书.pdf</div>
+                            <button>下载</button>
+                        </li>
+                        <li class="service-item">
+                            <div>📄 税务登记证.pdf</div>
+                            <button>下载</button>
+                        </li>
+                        <li class="service-item">
+                            <div>📄 银行开户许可证.pdf</div>
+                            <button>下载</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 消息中心 -->
+            <div id="messages" style="display: none;">
+                <div class="content-card">
+                    <h2>💬 消息中心</h2>
+                    <div style="margin-top: 20px; padding: 15px; background: #f0f7ff; border-radius: 5px;">
+                        <strong>📢 系统通知</strong>
+                        <p style="margin-top: 10px;">您的企业注册申请已进入审批阶段，预计 3-5 个工作日完成。</p>
+                        <p style="color: #666; margin-top: 10px; font-size: 12px;">2026-03-20 10:30</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 个人中心 -->
+            <div id="profile" style="display: none;">
+                <div class="content-card">
+                    <h2>👤 个人中心</h2>
+                    <div style="margin-top: 20px;">
+                        <div class="form-group">
+                            <label>公司名称</label>
+                            <input type="text" value="示例科技有限公司" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>联系人</label>
+                            <input type="text" value="张经理" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>联系电话</label>
+                            <input type="text" value="+86 138 **** ****" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>邮箱</label>
+                            <input type="email" value="example@company.com" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('welcomeUser').textContent = '欢迎，' + document.getElementById('username').value;
+        }
+
+        function logout() {
+            document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        function showSection(section) {
+            const sections = ['overview', 'services', 'orders', 'documents', 'messages', 'profile'];
+            sections.forEach(s => {
+                document.getElementById(s).style.display = s === section ? 'block' : 'none';
+            });
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
