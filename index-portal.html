@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIEC 系统门户 - 本地部署</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .system-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .system-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .system-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .system-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a3a5c;
+            margin-bottom: 15px;
+        }
+        .system-desc {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .system-features {
+            list-style: none;
+        }
+        .system-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        .system-features li:before {
+            content: "✓";
+            color: #4fc3f7;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .system-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8d 100%);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .system-btn:hover {
+            background: linear-gradient(135deg, #2c5f8d 0%, #4fc3f7 100%);
+            transform: translateX(5px);
+        }
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: #4caf50;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 CBIEC 系统门户</h1>
+            <p>塞浦路斯企业落地服务平台 - 本地部署版</p>
+        </div>
+
+        <div class="systems-grid">
+            <!-- 企业官网 -->
+            <div class="system-card">
+                <div class="system-icon">🌐</div>
+                <h2 class="system-name">企业官网</h2>
+                <p class="system-desc">三语言企业展示网站，包含公司介绍、服务项目、政策支持、成功案例等内容。</p>
+                <ul class="system-features">
+                    <li>中文/英文/希腊文三语言</li>
+                    <li>响应式设计（手机/平板/电脑）</li>
+                    <li>6 大服务模块展示</li>
+                    <li>成功案例展示</li>
+                    <li>常见问题解答</li>
+                </ul>
+                <a href="index.html" class="system-btn">打开官网 →</a>
+                <div class="status-badge">✅ 已就绪</div>
+            </div>
+
+            <!-- 客户门户 -->
+            <div class="system-card">
+                <div class="system-icon">👥</div>
+                <h2 class="system-name">客户门户</h2>
+                <p class="system-desc">客户专属管理平台，查看服务进度、下载文档、接收通知等。</p>
+                <ul class="system-features">
+                    <li>用户登录/注册</li>
+                    <li>服务进度跟踪</li>
+                    <li>文档中心下载</li>
+                    <li>订单管理</li>
+                    <li>消息通知</li>
+                </ul>
+                <a href="portal.html" class="system-btn">打开门户 →</a>
+                <div class="status-badge">✅ 已就绪</div>
+            </div>
+
+            <!-- 管理系统 -->
+            <div class="system-card">
+                <div class="system-icon">🏢</div>
+                <h2 class="system-name">管理系统</h2>
+                <p class="system-desc">企业内部管理平台，客户管理、销售管理、财务管理等。</p>
+                <ul class="system-features">
+                    <li>数据仪表盘</li>
+                    <li>客户管理</li>
+                    <li>销售管道</li>
+                    <li>服务管理</li>
+                    <li>财务报表</li>
+                </ul>
+                <a href="../management-system/index.html" class="system-btn">打开管理 →</a>
+                <div class="status-badge">✅ 已就绪</div>
+            </div>
+
+            <!-- 成功案例 -->
+            <div class="system-card">
+                <div class="system-icon">🏆</div>
+                <h2 class="system-name">成功案例</h2>
+                <p class="system-desc">展示已服务客户的成功案例，包括 AI、生物医药、电商等行业。</p>
+                <ul class="system-features">
+                    <li>6 大行业案例</li>
+                    <li>详细服务成果</li>
+                    <li>客户评价</li>
+                    <li>数据展示</li>
+                </ul>
+                <a href="cases.html" class="system-btn">查看案例 →</a>
+                <div class="status-badge">✅ 已就绪</div>
+            </div>
+
+            <!-- 常见问题 -->
+            <div class="system-card">
+                <div class="system-icon">❓</div>
+                <h2 class="system-name">常见问题</h2>
+                <p class="system-desc">解答客户关于塞浦路斯企业落地的常见问题。</p>
+                <ul class="system-features">
+                    <li>公司注册问题</li>
+                    <li>税务问题</li>
+                    <li>签证问题</li>
+                    <li>银行开户</li>
+                    <li>分类筛选</li>
+                </ul>
+                <a href="faq.html" class="system-btn">查看 FAQ →</a>
+                <div class="status-badge">✅ 已就绪</div>
+            </div>
+
+            <!-- 文档中心 -->
+            <div class="system-card">
+                <div class="system-icon">📁</div>
+                <h2 class="system-name">文档中心</h2>
+                <p class="system-desc">所有交付文档的集中管理，包括 WORD、HTML、PDF 等格式。</p>
+                <ul class="system-features">
+                    <li>企业官网源码</li>
+                    <li>客户门户源码</li>
+                    <li>管理系统源码</li>
+                    <li>部署报告</li>
+                    <li>使用手册</li>
+                </ul>
+                <a href="file://C:\生成文档" class="system-btn">打开文档夹 →</a>
+                <div class="status-badge">✅ 已就绪</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>CBIEC Cyprus Ltd</strong> - 塞浦路斯企业落地服务平台</p>
+            <p>📍 59, Poseidonos Avenue A104, 8042 Paphos, Cyprus</p>
+            <p>📞 +357-96001919 | ✉️ lian@cbiec.com</p>
+            <p style="margin-top: 20px; font-size: 14px;">© 2016-2026 CBIEC Cyprus Ltd. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 检测系统状态
+        const links = document.querySelectorAll('.system-btn');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('file://')) {
+                    // 本地文件夹，提示用户
+                    alert('即将打开本地文件夹：\n\n' + href.replace('file://', ''));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
